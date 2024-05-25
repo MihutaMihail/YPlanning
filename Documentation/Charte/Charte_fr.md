@@ -37,16 +37,16 @@ mon parcours dans la cybersécurité.
 
 ## Fonctionnalités
 ### Authentification
-<img src="./img/use_case_authentification.jpg">
+<img src="./Img/use_case_authentification.jpg">
 
 ### Administrateur
-<img src="./img/use_case_admin.jpg">
+<img src="./Img/use_case_admin.jpg">
 
 ### Etudiant
-<img src="./img/use_case_etudiant.jpg">
+<img src="./Img/use_case_etudiant.jpg">
 
 ### Professeur
-<img src="./img/use_case_prof.jpg">
+<img src="./Img/use_case_prof.jpg">
 
 ## Diagramme GANTT
 <img src="./../Gantt/gantt.JPG">
