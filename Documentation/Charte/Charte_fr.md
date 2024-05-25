@@ -49,9 +49,43 @@ mon parcours dans la cybersécurité.
 <img src="./img/use_case_prof.jpg">
 
 ## Diagramme GANTT
-- met l'image de diagramme de GANTT
-- met l'image de diagramme de GANTT
-- met l'image de diagramme de GANTT
+<img src="./../Gantt/gantt.JPG">
+
+### 25/05 - 30/05
+### Modifier les données de la base de données avec l'API (<ins>dev</ins>)
+- Avoir un conteneur pour le serveur de base de données
+- Avoir un conteneur pour l'API (docker file + docker compose conf file)
+- Utilisation du framework ASP.NET Core pour le développement de l'API
+- Utilisation du Entity Framework (EF) Core en tant que ORM
+- Communication entre l'API et la base de données pour modifier les données sur le serveur
+
+### Création des différents composants de l'infrastructure (<ins>infra</ins>)
+- Avoir un conteneur du serveur Nginx en tant que proxy inverse et serveur web
+- Création des serveurs DNS, DHCP
+- Création des VLANs
+
+### 31/05 - 05/06
+### Développer la totalité de l'API (<ins>dev</ins>)
+- Endpoints des opérations CRUD pour l'administrateur
+- Endpoints des opérations CRUD pour les cours
+- Endpoints des opérations CRUD pour les elèves
+- Endpoints des opérations CRUD pour les professuers
+
+### Configuration des composants (<ins>infra</ins>)
+- Configuration du proxy inverse
+- Configuration du serveur web
+- Configuration du DNS
+- Configuration du DHCP
+- Configuration des VLANs
+
+### 06/06 - 12/06
+### Développer l'interface de l'application (<ins>dev</ins>)
+- Utilisation du HTML / CSS / PHP
+- Mettre en lien l'interface de l'application et l'API
+
+### Sécurisation de l'infrastructure (<ins>infra</ins>)
+- Création des ACLs
+- Configuration de serveur Nginx pour l'utiliser en tant que pare-feu
 
 ## Technologies Utilisées
 ### Dev
@@ -82,8 +116,9 @@ Les fonctionnalités à avoir pour que le projet soit considéré comme viable s
 - Développement de l’API (authentification, opération CRUD, interaction avec base de données)
 - Développement du Front (l’interface) pour interagir avec le Backend
 - Intégration de la base de données
+- Image API et base de données pour Docker
 - Partie dev de la documentation technique
-- Préparer le README et la documentation de l'API
+- Préparer le README et le reste des fichiers de documentation
 
 ---
 
@@ -93,7 +128,8 @@ Les fonctionnalités à avoir pour que le projet soit considéré comme viable s
 - Mettre en place l’infrastructure (serveurs, pare-feu, vlans)
 - Configuration de l’infrastructure (serveur dns, dhcp, web et base de données)
 - Sécurisation de l’infrastructure (gestion des accès (ACL), configuration pare-feu)
-- Déploiement de l’API sur le serveur web
+- Image proxy inverse pour Docker
+- Aide au développement de l'interface
 - Partie infra de la documentation technique
 - UML détaillant la base de données
 - Création des schémas pour les usages (use case)
