@@ -2,7 +2,7 @@
 - [**Description**](#description)
 - [**Contexte**](#contexte)
 - [**Fonctionnalités**](#fonctionnalités)
-- [**Diagramme Gantt**](#Diagramme-gantt)
+- [**Diagramme Gantt**](#diagramme-gantt)
 - [**Technologies Utilisées**](#technologies-utilisées)
 - [**Critères de succés**](#critères-de-succès)
 - [**Rôles et Responsabilités**](#rôles-et-responsabilités)
@@ -51,7 +51,7 @@ mon parcours dans la cybersécurité.
 ## Diagramme GANTT
 <img src="./../Gantt/gantt.JPG">
 
-### 25/05 - 30/05
+### <ins>25/05 - 30/05</ins>
 ### Modifier les données de la base de données avec l'API (<ins>dev</ins>)
 - Avoir un conteneur pour le serveur de base de données
 - Avoir un conteneur pour l'API (docker file + docker compose conf file)
@@ -64,7 +64,7 @@ mon parcours dans la cybersécurité.
 - Création des serveurs DNS, DHCP
 - Création des VLANs
 
-### 31/05 - 05/06
+### <ins>31/05 - 05/06</ins>
 ### Développer la totalité de l'API (<ins>dev</ins>)
 - Endpoints des opérations CRUD pour l'administrateur
 - Endpoints des opérations CRUD pour les cours
@@ -78,7 +78,7 @@ mon parcours dans la cybersécurité.
 - Configuration du DHCP
 - Configuration des VLANs
 
-### 06/06 - 12/06
+### <ins>06/06 - 12/06</ins>
 ### Développer l'interface de l'application (<ins>dev</ins>)
 - Utilisation du HTML / CSS / PHP
 - Mettre en lien l'interface de l'application et l'API
