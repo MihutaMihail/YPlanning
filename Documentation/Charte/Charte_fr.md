@@ -58,6 +58,7 @@ mon parcours dans la cybersécurité.
 - Utilisation du framework ASP.NET Core pour le développement de l'API
 - Utilisation du Entity Framework (EF) Core en tant que ORM
 - Communication entre l'API et la base de données pour modifier les données sur le serveur
+- Générer un certificat SSL pour avoir accès en HTTPS et l'exporter dans Docker
 
 ### Création des différents composants de l'infrastructure (<ins>infra</ins>)
 - Avoir un conteneur du serveur Nginx en tant que proxy inverse et serveur web

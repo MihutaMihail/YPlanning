@@ -2,6 +2,8 @@
 - [**18/05/2024**](#18052024)
 - [**23/05/2024**](#23052024)
 - [**24/05/2024**](#24052024)
+- [**25/05/2024**](#25052024)
+- [**26-27/05/2024**](#26-27052024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -33,3 +35,13 @@ D’après ce que j’ai trouvé, Nginx semble être fait pour être un reverse 
 Avant de commencer, je me suis assurer qu'on a tous les fichiers nécessaires dans notre répo comme la documentation technique, la charte, fiche de suivi, etc. Chaque fichier de documentation aura une version en français et une en anglais. J'ai aussi pensé a ce qu'on pourrait ajouter dans ces documentations (le readme du répo inclus) parce qu'on devra mettre à jour ces fichiers dés qu'on peut, il faut pas les laisser à la fin du projet. C'est comme si on avait un template.
 
 La charte du projet a aussi été mise à jour, j'ai ajouté les technologies utilisées ainsi qu'un planning prévisionnel.
+
+## 25/05/2024
+J'ai fait un diagramme de GANTT pour le chapitre "planning prévisionnel" pour la charte.
+
+J'ai installé tout ce qu'il faut et un projet ASP.NET Core a été créer dans le répertoire. Pour le moment, je suis en train de faire fonctionner l'API template qui est donné dans Docker.
+
+## 26-27/05/2024
+J'ai réussi (27/05) à faire marcher l'API template de ASP.NET Core sur HTTPS dans Docker. Le script powershell prend en compte d'autres situations comme par exemple donnée la posibilité au utilisateur de ne pas recréer un certificate puisqu'il en a déjà un et d'autres choses.
+
+Faire marcher l'API sur Docker a été accompli plutôt facilement. Le gros problème été pour le faire fonctionner sur HTTPS. Il y a eu beaucoup de choses pour prendre en compte dans le script powershell et donc aussi dans Docker pour pouvoir utiliser des secrets (pour mettre le mot de passe du certificat), pour prendre ce fichier là et l'utiliser dans Docker pour pouvoir lire le certificat et donc l'utiliser et vers la fin des problèmes de caches. Chrome ne voulais pas mettre à jour le certificat après avoir été créer et donc beaucoup du temps a été dépensé pour essayer des nouvelles choses alors que le script fonctionnait, je devais juste relancer Chrome.
