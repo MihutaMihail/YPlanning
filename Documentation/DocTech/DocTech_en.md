@@ -1,5 +1,6 @@
 # Table of Contents
 - [**Project Overview**](#project-overview)
+- [**Stack**](#stack)
 - [**Architecture Diagram**](#architecture-diagram)
 - [**Database Diagram**](#database-diagram)
 - [**Prerequisites**](#prerequisites)
@@ -11,6 +12,15 @@
 - Name
 - Purpose
 - Components (database server, api server, etc) 
+
+## Stack
+<ins>Backend Framework</ins> → ASP.NET Core <br>
+<ins>Database</ins> → PostgreSQL Server <br>
+<ins>ORM</ins> → Entity Framework (EF) Core <br>
+<ins>Web Server</ins> → Nginx Server <br>
+<ins>Deployment Platform</ins> → Docker <br>
+<ins>API IDE</ins> → Visual studio
+<ins>Postgre IDE</ins> → pgAdmin
 
 ## Architecture Diagram
 - Visual diagram showing the interaction between each component 

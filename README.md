@@ -11,8 +11,17 @@ Description of the project
 ## Features
 - Nginx reverse proxy
 - Containerized using Docker
-- C# API built with ASP.NEt Code
+- C# API built with ASP.NET Core
 - ORM Entity Framework (EF) Core
+
+Here's an overview of the stack
+Stack : <br>
+<ins>Backend Framework</ins> → ASP.NET Core <br>
+<ins>Database</ins> → PostgreSQL Server <br>
+<ins>ORM</ins> → Entity Framework (EF) Core <br>
+<ins>Web Server</ins> → Nginx Server <br>
+<ins>Deployment Platform</ins> → Docker <br>
+<ins>IDE</ins> → Visual studio
 
 ## Prerequisites
 - Prerequisites like installing Docker 
