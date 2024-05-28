@@ -399,8 +399,8 @@ $RECYCLE.BIN/
 
 
 # Ignorer les fichiers de Looping
-*.loo
-*.lo1
+*.lo*
+
 
 # Ignorer les fichiers de Visual Paradigm
-*.vpp
+*.vpp*
