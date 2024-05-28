@@ -397,6 +397,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-#conception
-*.lo*
-*.vpp.bak_*
+
+# Ignorer les fichiers de Looping
+*.loo
+*.lo1
+
+# Ignorer les fichiers de Visual Paradigm
+*.vpp
