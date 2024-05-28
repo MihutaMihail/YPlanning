@@ -23,6 +23,9 @@ Description of the project
 - How to start the application  
 - How to access different services like http://localhost:3000 for the api server and http://localhost:5000 for the nginx server
 
+Here's the link to download Docker (put link)
+We're using version 4.30.0
+
 Before executing the powershell script, make sure that your Docker is set to linux containers add $ImageThatShowsThat
 Make sure that Docker is opened, if not the image will not be built
 
@@ -36,6 +39,7 @@ $showImageRunOptionsThatIncludeAddingThe443Port
 If not it does not listen to the 443 port
 
 TO NOTE
+You must have .NET SDK installed, here's the link https://dotnet.microsoft.com/en-us/download/dotnet (choose .NET 6.0)
 If it doesn’t work, it might be because the certificate is not trusted (**dotnet dev-certs https --trust**) or perhaps the password that you have given is incorrect (the certificate password)
 You may need to restart your browser, sometimes chrome (or perhaps another browser) may use the old (now deleted) certificate which will not work (cert invalid error)
 
