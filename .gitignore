@@ -400,7 +400,7 @@ $RECYCLE.BIN/
 
 # Ignorer les fichiers de Looping
 *.lo*
-
+conception/LoopingImage.jpg
 
 # Ignorer les fichiers de Visual Paradigm
 *.vpp*
