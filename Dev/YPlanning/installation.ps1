@@ -1,3 +1,7 @@
+###
+### CERTIFICATE
+###
+
 # Generate a new SSL certificate
 function New-Certificate {
     Write-Host "Generating new certificate..."
@@ -33,6 +37,7 @@ function Get-Certificate {
     }
 }
 
+# Ensure that Docker Swarm Mode is initialized. Swarm Mode is needed for creating secrets
 function Ensure-SwarmInitialized {
     $swarmStatus = docker info --format '{{.Swarm.LocalNodeState}}'
     if ($swarmStatus -ne 'active') {
@@ -117,11 +122,91 @@ if (Get-Certificate != null) {
     New-Certificate
 }
 
-Write-Host "The docker image is being built..."
+###
+### DOCKER
+###
 
-# Build docker image
-$buildDockerImage = "docker build --secret id=CERT_PASSWORD,src=./cert_password.txt -t yplanning:latest ."
-Invoke-Expression $buildDockerImage
+# Build and run API Docker image
+function Run-API {
+    # Build image
+    $imageFullName = "yplanning:latest"
+
+    # Check if image exists
+    $imageExists = docker images -q $imageFullName
+
+    if ($imageExists) {
+        Write-Host "Image $imageFullName already exists"
+    } else {
+        Write-Host "Image $imageFullName does not exist. Building image..."
+        $buildDockerImage = "docker build --secret id=CERT_PASSWORD,src=./cert_password.txt -t yplanning:latest ."
+        Invoke-Expression $buildDockerImage
+    }
+
+    # Run container
+    $containerName = "yplanning"
+    $portMapping = "443:443"
+
+    # Check if container is already running
+    if (docker ps -a --format '{{.Names}}' | Select-String $containerName) {
+        Write-Output "Container $containerName is already running."
+    } else {
+        Write-Output "Container $containerName is not running. Starting..."
+        
+        # Run container
+        Write-Host "Running container : $containerName..."
+        $runDockerContainer = "docker run -d -p $portMapping --name $containerName $imageFullName"
+        Invoke-Expression $runDockerContainer
+        Write-Host "Container $containerName is running on port 443"
+    }
+}
+
+# Run PostgreSQL Docker image and initialize database
+function Run-PostgreSQL {
+    $containerName = "postgres"
+    $portMapping = "5432:5432"
+    $dbFile = "schema.sql"
+    $dbName = "yplanning"
+
+    # Prompt user to enter database password
+    $password = Read-Host -Prompt "Enter password for the database" -AsSecureString
+    $passwordPlainText = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))
+
+    # Check if container is already running
+    if (docker ps -a --format '{{.Names}}' | Select-String $containerName) {
+        Write-Output "Container $containerName is already running."
+    } else {
+        Write-Output "Container $containerName is not running. Starting..."
+        
+        # Run container
+        $runDockerContainer = "docker run --name $containerName -p $portMapping -e POSTGRES_PASSWORD=$passwordPlainText -d postgres"
+        Invoke-Expression $runDockerContainer
+        Write-Host "Waiting for 10 seconds for the server to start..."
+        Start-Sleep -s 10
+    }
+    
+    # Ask user if they've already set up the PostgreSQL server
+    do {
+        $response = Read-Host -Prompt "Type 'Y' if this is your first time executing this script ? (Y/N)" -ErrorAction SilentlyContinue
+    } while ($response -notin @('Y', 'N'))
+
+    if ($response -eq "Y" -or $response -eq "y") {
+        # Copy database file into Docker
+        $copyDbToDocker = "docker cp $dbFile ${containerName}:/tmp/$dbFile"
+        Invoke-Expression $copyDbToDocker
+        
+        # Create database
+        $createDatabase = "docker exec -it $containerName psql -U postgres -c 'CREATE DATABASE $dbName WITH OWNER = postgres ENCODING = ''UTF8'' LC_COLLATE = ''en_US.utf8'' LC_CTYPE = ''en_US.utf8'' LOCALE_PROVIDER = ''libc'' TABLESPACE = pg_default CONNECTION LIMIT = -1 IS_TEMPLATE = False;'"
+        Invoke-Expression $createDatabase
+
+        # Creates tables by executing script
+        $exeDbFile = "docker exec -it $containerName psql -U postgres -d $dbName -f /tmp/$dbFile"
+        Invoke-Expression $exeDbFile
+    }
+}
+
+# Run all necessary containers
+Run-API
+Run-PostgreSQL
 
 # Remove file containing secret value after creating the secret
 Remove-File -fileName "cert_password.txt"
