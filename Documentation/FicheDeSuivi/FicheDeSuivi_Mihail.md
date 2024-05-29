@@ -4,6 +4,7 @@
 - [**24/05/2024**](#24052024)
 - [**25/05/2024**](#25052024)
 - [**26-27/05/2024**](#26-27052024)
+- [**28/05/2024**](#28052024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -45,3 +46,8 @@ J'ai installé tout ce qu'il faut et un projet ASP.NET Core a été créer dans 
 J'ai réussi (27/05) à faire marcher l'API template de ASP.NET Core sur HTTPS dans Docker. Le script powershell prend en compte d'autres situations comme par exemple donnée la posibilité au utilisateur de ne pas recréer un certificate puisqu'il en a déjà un et d'autres choses.
 
 Faire marcher l'API sur Docker a été accompli plutôt facilement. Le gros problème été pour le faire fonctionner sur HTTPS. Il y a eu beaucoup de choses pour prendre en compte dans le script powershell et donc aussi dans Docker pour pouvoir utiliser des secrets (pour mettre le mot de passe du certificat), pour prendre ce fichier là et l'utiliser dans Docker pour pouvoir lire le certificat et donc l'utiliser et vers la fin des problèmes de caches. Chrome ne voulais pas mettre à jour le certificat après avoir été créer et donc beaucoup du temps a été dépensé pour essayer des nouvelles choses alors que le script fonctionnait, je devais juste relancer Chrome.
+
+## 28/05/2024
+J'ai mis à jour quelques fichiers du dossier documentation.
+On (moi et mon collègue) a fait le MCD pour la base de données.
+De plus, je me suis intérésée comment je pourrais faire fonctionner un serveur Postgres sur Docker et aussi au IDE que je pourrait utiliser observer la base de données.
