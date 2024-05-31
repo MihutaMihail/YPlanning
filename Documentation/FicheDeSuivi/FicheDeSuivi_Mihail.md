@@ -5,6 +5,7 @@
 - [**25/05/2024**](#25052024)
 - [**26-27/05/2024**](#26-27052024)
 - [**28/05/2024**](#28052024)
+- [**29/05/2024**](#29052024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -51,3 +52,6 @@ Faire marcher l'API sur Docker a été accompli plutôt facilement. Le gros prob
 J'ai mis à jour quelques fichiers du dossier documentation.
 On (moi et mon collègue) a fait le MCD pour la base de données.
 De plus, je me suis intérésée comment je pourrais faire fonctionner un serveur Postgres sur Docker et aussi au IDE que je pourrait utiliser observer la base de données.
+
+## 29/05/2024
+Mise à jour du script pour intégrer la base de données PostgresSQL dans Docker. Le script powershell maintenant démarre les conteneurs lors de l'installation, plus besoin de mettre manuellement port 443 pour le l'API. Installation du pg admin 4 pour accèder à la base de données de PostgresSQL. Lors de l'installation (dans le script), je créer la base de données et les tables nécessaires. Je vais probablement ajouter du seeding plus tard.
