@@ -31,3 +31,14 @@ C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\refint\YPlanning
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\YPlanning.pdb
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\YPlanning.genruntimeconfig.cache
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\ref\YPlanning.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Npgsql.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\System.Text.Json.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll

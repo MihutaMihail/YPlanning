@@ -6,6 +6,8 @@
 - [**26-27/05/2024**](#26-27052024)
 - [**28/05/2024**](#28052024)
 - [**29/05/2024**](#29052024)
+- [**31/05/2024**](#31052024)
+- [**01/06/2024**](#01062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -55,3 +57,9 @@ De plus, je me suis intérésée comment je pourrais faire fonctionner un serveu
 
 ## 29/05/2024
 Mise à jour du script pour intégrer la base de données PostgresSQL dans Docker. Le script powershell maintenant démarre les conteneurs lors de l'installation, plus besoin de mettre manuellement port 443 pour le l'API. Installation du pg admin 4 pour accèder à la base de données de PostgresSQL. Lors de l'installation (dans le script), je créer la base de données et les tables nécessaires. Je vais probablement ajouter du seeding plus tard.
+
+## 31/05/2024
+Optimisation du code pour le script d'installation et l'ajout d'un menu de cette façon je peux construire que l'image de l'API si j'ai fait des modifications sur l'API mais pour les autres composants comme la base de données ou le certificat. Fait les tables de la base de données dans c# mais le problème qu'apparament c'est pas si simple. Il faut aussi prendre en compte les relations / cardinalités entre les tables et donc les mettres dans l'API.
+
+## 01/06/2024
+Refait les relations et cardinalités pour la base de données. Fait les modèles des tables pour l'API. Utilisation du Entity Framework pour faire le data context qui fait référance à la base de données. Il y a aussi le OnModelCreating() qui est rempli pour que Entity Framework fasse les correctes relations entre les tables.
