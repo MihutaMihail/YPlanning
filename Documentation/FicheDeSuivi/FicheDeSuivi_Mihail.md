@@ -8,6 +8,7 @@
 - [**29/05/2024**](#29052024)
 - [**31/05/2024**](#31052024)
 - [**01/06/2024**](#01062024)
+- [**02/06/2024**](#02062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -63,3 +64,8 @@ Optimisation du code pour le script d'installation et l'ajout d'un menu de cette
 
 ## 01/06/2024
 Refait les relations et cardinalités pour la base de données. Fait les modèles des tables pour l'API. Utilisation du Entity Framework pour faire le data context qui fait référance à la base de données. Il y a aussi le OnModelCreating() qui est rempli pour que Entity Framework fasse les correctes relations entre les tables.
+
+## 02/06/2024
+J'ai mis à jour le code SQL pour la base de données vu qu'elle a été modifié. J'ai essayer de me connecter à la base de donées postgres depuis l'API j'ai réussi. J'ai eu un problème que je me suis pas rendu compte pour un bon moment mais le problème c'été le host. Je suppose comme le server postgres n'est pas sur notre machine techniquement vu que c'est dans Docker, localhost, donc l'adresse 127.0.0.1 ne va pas fonctionner. Pour cela, il changer le host avec l'adresse du server postgres qui se trouve dans le fichier de configuration.
+
+J'ai fait en sorte que l'adresse IP du serveur PostgreSQL est automatiquement prise le moment où le conteneur de l'API est créer. De cette façon, n'importe l'adresse IP que le serveur PostgreSQL aura, ça devra fonctionner.

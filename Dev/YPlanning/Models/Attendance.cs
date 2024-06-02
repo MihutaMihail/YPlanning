@@ -2,7 +2,6 @@
 {
     public class Attendance
     {
-        public int Id { get; set; }
         public int ClassId {  get; set; }
         public int MemberId { get; set; }
         public string? Status { get; set; }
