@@ -69,3 +69,10 @@ Refait les relations et cardinalités pour la base de données. Fait les modèle
 J'ai mis à jour le code SQL pour la base de données vu qu'elle a été modifié. J'ai essayer de me connecter à la base de donées postgres depuis l'API j'ai réussi. J'ai eu un problème que je me suis pas rendu compte pour un bon moment mais le problème c'été le host. Je suppose comme le server postgres n'est pas sur notre machine techniquement vu que c'est dans Docker, localhost, donc l'adresse 127.0.0.1 ne va pas fonctionner. Pour cela, il changer le host avec l'adresse du server postgres qui se trouve dans le fichier de configuration.
 
 J'ai fait en sorte que l'adresse IP du serveur PostgreSQL est automatiquement prise le moment où le conteneur de l'API est créer. De cette façon, n'importe l'adresse IP que le serveur PostgreSQL aura, ça devra fonctionner.
+
+J'ai changé les noms des entités au pluriel même si on n'a pas besoin de changer, parfois il y a des mots comme *contraint* ou *user* qui ne peuvent pas être utiliser comme un nom de table vu qu'il est résérver. Les noms d'entités comme *contraint**s*** ou *user**s***, ne vont pas poser des problèmes.
+
+J'ai créer le premier Controller pour les users dans l'API. J'ai utilisé des interfaces pour définir les méthodes utilisées qui vont être faite par les repositories mais aussi pour appeler ces méthodes. C'est comme si l'interface est le front qui va tout définir mais aussi appeller le back (juste le repository) pour utiliser sa fonction.
+Pour finir, tout ça a été utilisé dans un controller pour pouvoir faire un simple get pour avoir tous les users.
+
+Pour finir, j'ai dû indiqué à entity framework d'utiliser des miniscules pour les tables mais aussi pour les colonnes parce que postgres mais tous en miniscule par défaut mais entity framework met la première lettre en majuscule et donc il n'arrive pas a trouver les tables ou colonnes sans définir ces choses là.

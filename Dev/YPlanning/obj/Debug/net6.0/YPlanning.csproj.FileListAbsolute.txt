@@ -36,3 +36,5 @@ C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\refint\YPlanning
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\YPlanning.pdb
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\YPlanning.genruntimeconfig.cache
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\ref\YPlanning.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Humanizer.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll

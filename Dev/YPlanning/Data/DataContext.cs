@@ -10,7 +10,7 @@ namespace YPlanning.Data
 
         }
 
-        public DbSet<Member>? Members { get; set; }
+        public DbSet<User>? Users { get; set; }
         public DbSet<Account>? Accounts { get; set; }
         public DbSet<Class>? Classes { get; set; }
         public DbSet<Attendance>? Attendances { get; set; }
@@ -18,25 +18,32 @@ namespace YPlanning.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // One-to-one relationship between Member and Account
-            modelBuilder.Entity<Member>()
-                .HasOne(m => m.Account)
-                .WithOne(ac => ac.Member)
-                .HasForeignKey<Account>(ac => ac.MemberId);
+            // Explicitly specify the table names for all entities
+            modelBuilder.Entity<User>().ToTable("users");
+            modelBuilder.Entity<Account>().ToTable("accounts");
+            modelBuilder.Entity<Class>().ToTable("classes");
+            modelBuilder.Entity<Attendance>().ToTable("attendances");
+            modelBuilder.Entity<Test>().ToTable("tests");
 
-            // One-to-many relationship between Member and Tests
-            modelBuilder.Entity<Member>()
-                .HasMany(m => m.Tests)
-                .WithOne(t => t.Member)
-                .HasForeignKey(t => t.MemberId);
+            // One-to-one relationship between User and Account
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Account)
+                .WithOne(ac => ac.User)
+                .HasForeignKey<Account>(ac => ac.UserId);
 
-            // Many-to-many relationship for Attendaces between Member and Class
+            // One-to-many relationship between User and Tests
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Tests)
+                .WithOne(t => t.User)
+                .HasForeignKey(t => t.UserId);
+
+            // Many-to-many relationship for Attendaces between User and Class
             modelBuilder.Entity<Attendance>()
-                .HasKey(at => new { at.MemberId, at.ClassId });
+                .HasKey(at => new { at.UserId, at.ClassId });
             modelBuilder.Entity<Attendance>()
-                .HasOne(m => m.Member)
+                .HasOne(u => u.User)
                 .WithMany(at => at.Attendances)
-                .HasForeignKey(m => m.MemberId);
+                .HasForeignKey(u => u.UserId);
             modelBuilder.Entity<Attendance>()
                 .HasOne(c => c.Class)
                 .WithMany(at => at.Attendances)
