@@ -26,10 +26,10 @@ function Handle-Certificate {
 # Generate a new SSL certificate
 function New-Certificate {
     Write-Host "New certificate password..."
-    $passwordPlainText = Read-Password -PlainTextOutput
+    $certPasswordPlainText = Read-Password -PlainTextOutput
     
     # Generate a self-signed certificate and export as localhost.pfx (Personal Information Exchange)
-    Invoke-Expression "dotnet dev-certs https --export-path $APP_SETUP_PATH/localhost.pfx --password $passwordPlainText"
+    Invoke-Expression "dotnet dev-certs https --export-path $APP_SETUP_PATH/localhost.pfx --password $certPasswordPlainText"
     
     # Trust the newly created certificate
     Invoke-Expression "dotnet dev-certs https --trust"
@@ -38,11 +38,11 @@ function New-Certificate {
 # If certificate already exists, copy it
 function Copy-ExistingCertificate {
     Write-Host "Existant certificate password..."
-    $password = Read-Password
+    $certPassword = Read-Password
 
     # Export existing certificate
     $existingCert = Get-Certificate
-    Export-PfxCertificate -Cert $existingCert -FilePath "$APP_SETUP_PATH/localhost.pfx" -Password $password
+    Export-PfxCertificate -Cert $existingCert -FilePath "$APP_SETUP_PATH/localhost.pfx" -Password $certPassword
 
     Write-Host "Using existing certificate with CN=localhost"
 }
@@ -91,6 +91,57 @@ function Ensure-SwarmInitialized {
 }#>
 
 # /*-----------------------------------
+### POSTGRESQL
+# \*-----------------------------------
+
+function Handle-PostgreSQL {
+    Run-PostgreSQL
+    Execute-PostgreSQL
+}
+
+function Run-PostgreSQL {
+    Write-Host "Running phase..."
+
+    $imageFullName = "postgres:latest"
+    $containerName = "postgres"
+    $portMapping = "5432:5432"
+
+    # Stop and remove running containers
+    Remove-Containers -containerName $containerName
+
+    Write-Host "Database password..."
+    $dbPasswordPlainText = Read-Password -PlainTextOutput
+
+    # Run container
+    Write-Host "Running PostgreSQL container..."
+    Invoke-Expression "docker run --name $containerName -p $portMapping -e POSTGRES_PASSWORD=$dbPasswordPlainText -d $imageFullName"
+}
+
+function Execute-PostgreSQL {
+    Write-Host "Executing SQL scripts phase..."
+    Write-Host "Waiting for 15 seconds for the server to start..."
+    Start-Sleep -s 15
+
+    $containerName = "postgres"
+    $dbFile = "schema.sql"
+    $dbName = "yplanning"
+
+    # Copy database file
+    Write-Host "Copy database file..."
+    Invoke-Expression "docker cp $APP_SETUP_PATH/$dbFile ${containerName}:/tmp/$dbFile"
+
+    # Create database
+    Write-Host "Create database..."
+    Invoke-Expression "docker exec -it $containerName psql -U postgres -c 'CREATE DATABASE $dbName WITH OWNER = postgres `
+    ENCODING = ''UTF8'' LC_COLLATE = ''en_US.utf8'' LC_CTYPE = ''en_US.utf8'' LOCALE_PROVIDER = ''libc'' `
+    TABLESPACE = pg_default CONNECTION LIMIT = -1 IS_TEMPLATE = False;'"
+
+    # Creates tables
+    Write-Host "Create tables..."
+    Invoke-Expression "docker exec -it $containerName psql -U postgres -d $dbName -f /tmp/$dbFile"
+}
+
+# /*-----------------------------------
 ### API
 # \*-----------------------------------
 
@@ -129,60 +180,17 @@ function Run-API {
     $portMapping = "443:443"
 
     Write-Host "Certificate password..."
-    $passwordPlainText = Read-Password -PlainTextOutput
+    $certPasswordPlainText = Read-Password -PlainTextOutput
+
+    Write-Host "Database password..."
+    $pgPasswordPlainText = Read-Password -PlainTextOutput
+
+    Write-Host "Getting PostgreSQL server ip address..."
+    $pgIpAddress = docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres
 
     # Run container
     Write-Host "Running API container..."
-    Invoke-Expression "docker run --name $containerName -p $portMapping -e 'CERT_PASSWORD=$passwordPlainText' -d $containerName"
-}
-
-# /*-----------------------------------
-### POSTGRESQL
-# \*-----------------------------------
-
-function Handle-PostgreSQL {
-    Run-PostgreSQL
-    Execute-PostgreSQL
-}
-
-function Run-PostgreSQL {
-    Write-Host "Running phase..."
-
-    $imageFullName = "postgres:latest"
-    $containerName = "postgres"
-    $portMapping = "5432:5432"
-
-    # Stop and remove running containers
-    Remove-Containers -containerName $containerName
-
-    Write-Host "Database password..."
-    $passwordPlainText = Read-Password -PlainTextOutput
-
-    # Run container
-    Write-Host "Running PostgreSQL container..."
-    Invoke-Expression "docker run --name $containerName -p $portMapping -e POSTGRES_PASSWORD=$passwordPlainText -d $imageFullName"
-}
-
-function Execute-PostgreSQL {
-    Write-Host "Executing SQL scripts phase..."
-    Write-Host "Waiting for 15 seconds for the server to start..."
-    Start-Sleep -s 15
-
-    $containerName = "postgres"
-    $dbFile = "schema.sql"
-    $dbName = "yplanning"
-
-    # Copy database file
-    Write-Host "Copy database file..."
-    Invoke-Expression "docker cp $APP_SETUP_PATH/$dbFile ${containerName}:/tmp/$dbFile"
-
-    # Create database
-    Write-Host "Create database..."
-    Invoke-Expression "docker exec -it $containerName psql -U postgres -c 'CREATE DATABASE $dbName WITH OWNER = postgres ENCODING = ''UTF8'' LC_COLLATE = ''en_US.utf8'' LC_CTYPE = ''en_US.utf8'' LOCALE_PROVIDER = ''libc'' TABLESPACE = pg_default CONNECTION LIMIT = -1 IS_TEMPLATE = False;'"
-
-    # Creates tables
-    Write-Host "Create tables..."
-    Invoke-Expression "docker exec -it $containerName psql -U postgres -d $dbName -f /tmp/$dbFile"
+    Invoke-Expression "docker run --name $containerName -p $portMapping -e 'CERT_PASSWORD=$certPasswordPlainText' -e 'POSTGRES_PASSWORD=$pgPasswordPlainText' -e 'POSTGRESS_IP_ADDRESS=$pgIpAddress' -d $containerName"
 }
 
 # /*-----------------------------------
@@ -228,11 +236,13 @@ function Remove-Containers {
 function Show-Menu {
     Clear-Host
     Write-Host "=== Setup Menu ==="
-    Write-Host "WARNING : CHOOSING ANYTHING AFTER THE FULL SETUP OPTION COULD RESULT IN DATA LOSS"
     Write-Host "1. FULL SETUP (RECOMMENDED FOR FIRST USE)"
+    Write-Host ""
+    Write-Host "WARNING : CHOOSING ANYTHING ON THIS LIST COULD RESULT IN DATA LOSS"
+    Write-Host "Please note that it could also simply fail to work if the FULL SETUP option has not been completed"
     Write-Host "2. Certificate"
-    Write-Host "3. API"
-    Write-Host "4. PostgreSQL"
+    Write-Host "3. PostgreSQL"
+    Write-Host "4. API"
     Write-Host "Q. Quit"
     Write-Host "============="
 }
@@ -243,8 +253,8 @@ do {
     switch ($choice.ToUpper()) {
         '1' {
             Handle-Certificate
-            Handle-API
             Handle-PostgreSQL
+            Handle-API
             Pause
         }
         '2' {
@@ -252,11 +262,11 @@ do {
             Pause
         }
         '3' {
-            Handle-API
+            Handle-PostgreSQL
             Pause
         }
         '4' {
-            Handle-PostgreSQL
+            Handle-API
             Pause
         }
         'Q' {

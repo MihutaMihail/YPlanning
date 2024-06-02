@@ -6,6 +6,9 @@
 - [**26-27/05/2024**](#26-27052024)
 - [**28/05/2024**](#28052024)
 - [**29/05/2024**](#29052024)
+- [**31/05/2024**](#31052024)
+- [**01/06/2024**](#01062024)
+- [**02/06/2024**](#02062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -55,3 +58,21 @@ De plus, je me suis intérésée comment je pourrais faire fonctionner un serveu
 
 ## 29/05/2024
 Mise à jour du script pour intégrer la base de données PostgresSQL dans Docker. Le script powershell maintenant démarre les conteneurs lors de l'installation, plus besoin de mettre manuellement port 443 pour le l'API. Installation du pg admin 4 pour accèder à la base de données de PostgresSQL. Lors de l'installation (dans le script), je créer la base de données et les tables nécessaires. Je vais probablement ajouter du seeding plus tard.
+
+## 31/05/2024
+Optimisation du code pour le script d'installation et l'ajout d'un menu de cette façon je peux construire que l'image de l'API si j'ai fait des modifications sur l'API mais pour les autres composants comme la base de données ou le certificat. Fait les tables de la base de données dans c# mais le problème qu'apparament c'est pas si simple. Il faut aussi prendre en compte les relations / cardinalités entre les tables et donc les mettres dans l'API.
+
+## 01/06/2024
+Refait les relations et cardinalités pour la base de données. Fait les modèles des tables pour l'API. Utilisation du Entity Framework pour faire le data context qui fait référance à la base de données. Il y a aussi le OnModelCreating() qui est rempli pour que Entity Framework fasse les correctes relations entre les tables.
+
+## 02/06/2024
+J'ai mis à jour le code SQL pour la base de données vu qu'elle a été modifié. J'ai essayer de me connecter à la base de donées postgres depuis l'API j'ai réussi. J'ai eu un problème que je me suis pas rendu compte pour un bon moment mais le problème c'été le host. Je suppose comme le server postgres n'est pas sur notre machine techniquement vu que c'est dans Docker, localhost, donc l'adresse 127.0.0.1 ne va pas fonctionner. Pour cela, il changer le host avec l'adresse du server postgres qui se trouve dans le fichier de configuration.
+
+J'ai fait en sorte que l'adresse IP du serveur PostgreSQL est automatiquement prise le moment où le conteneur de l'API est créer. De cette façon, n'importe l'adresse IP que le serveur PostgreSQL aura, ça devra fonctionner.
+
+J'ai changé les noms des entités au pluriel même si on n'a pas besoin de changer, parfois il y a des mots comme *contraint* ou *user* qui ne peuvent pas être utiliser comme un nom de table vu qu'il est résérver. Les noms d'entités comme *contraint**s*** ou *user**s***, ne vont pas poser des problèmes.
+
+J'ai créer le premier Controller pour les users dans l'API. J'ai utilisé des interfaces pour définir les méthodes utilisées qui vont être faite par les repositories mais aussi pour appeler ces méthodes. C'est comme si l'interface est le front qui va tout définir mais aussi appeller le back (juste le repository) pour utiliser sa fonction.
+Pour finir, tout ça a été utilisé dans un controller pour pouvoir faire un simple get pour avoir tous les users.
+
+Pour finir, j'ai dû indiqué à entity framework d'utiliser des miniscules pour les tables mais aussi pour les colonnes parce que postgres mais tous en miniscule par défaut mais entity framework met la première lettre en majuscule et donc il n'arrive pas a trouver les tables ou colonnes sans définir ces choses là.

@@ -5,7 +5,12 @@ C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\YPlanning.deps.j
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\YPlanning.runtimeconfig.json
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\YPlanning.dll
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\YPlanning.pdb
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Npgsql.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -31,3 +36,5 @@ C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\refint\YPlanning
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\YPlanning.pdb
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\YPlanning.genruntimeconfig.cache
 C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\obj\Debug\net6.0\ref\YPlanning.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Humanizer.dll
+C:\Users\mariu\Desktop\YPlanning\Dev\YPlanning\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll

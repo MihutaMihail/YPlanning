@@ -1,43 +1,69 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using YPlanning.Data;
+using YPlanning.Interfaces;
+using YPlanning.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Read certificate settings from environment variables (inside Docker container)
-var certPath = Environment.GetEnvironmentVariable("CERT_PATH");
-var certPassword = Environment.GetEnvironmentVariable("CERT_PASSWORD");
+// Get environment variables
+var CERT_PATH = Environment.GetEnvironmentVariable("CERT_PATH");
+var CERT_PASSWORD = Environment.GetEnvironmentVariable("CERT_PASSWORD");
+var POSTGRES_PASSWORD = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
+var POSTGRESS_IP_ADDRESS = Environment.GetEnvironmentVariable("POSTGRESS_IP_ADDRESS");
 var httpsPort = 443;
 
-// Configure Kestrel (Dockers uses it) to use HTTPS with the provided certificate
-builder.WebHost.ConfigureKestrel(serverOptions =>
+// Check certificate
+if (string.IsNullOrEmpty(CERT_PATH) || string.IsNullOrEmpty(CERT_PASSWORD))
 {
-    serverOptions.ListenAnyIP(httpsPort, listenOptions =>
+    Console.WriteLine("Certificate path or password is missing");
+}
+else
+{
+    builder.WebHost.ConfigureKestrel(serverOptions =>
     {
-        listenOptions.UseHttps(certPath, certPassword);
+        serverOptions.ListenAnyIP(httpsPort, listenOptions =>
+        {
+            listenOptions.UseHttps(CERT_PATH, CERT_PASSWORD);
+        });
     });
-});
+}
 
-// Read PostgreSQL password from environment variable
-/*var pgPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD");
-
-if (string.IsNullOrEmpty(pgPassword))
+// Check PostgreSQL
+if (string.IsNullOrEmpty(POSTGRES_PASSWORD) || string.IsNullOrEmpty(POSTGRESS_IP_ADDRESS))
 {
-    throw new InvalidOperationException("PostgreSQL password is not configured correctly.");
+    throw new InvalidOperationException("PostgreSQL password or IP address is not configured correctly.");
 }
 
 // Build connection string
-var connectionString = $"Host=localhost;Port=5432;Username=your_username;Password={pgPassword};Database=your_database";
-
-// Register the DbContext with the connection string
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString));
-*/
+var connectionString = $"Username=postgres;Password={POSTGRES_PASSWORD};Host={POSTGRESS_IP_ADDRESS};Port=5432;Database=yplanning";
 
 // Add services to the container
 builder.Services.AddControllers();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseNpgsql(connectionString)
+);
 
 var app = builder.Build();
+
+// Test database connection
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+    try
+    {
+        dbContext.Database.OpenConnection();
+        dbContext.Database.CloseConnection();
+        Console.WriteLine("Database connection is successful");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Database connection failed: {ex.Message}");
+    }
+}
 
 if (app.Environment.IsDevelopment())
 {
