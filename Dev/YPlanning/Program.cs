@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YPlanning.Data;
 using YPlanning.Interfaces;
@@ -40,6 +39,7 @@ var connectionString = $"Username=postgres;Password={POSTGRES_PASSWORD};Host={PO
 
 // Add services to the container
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
