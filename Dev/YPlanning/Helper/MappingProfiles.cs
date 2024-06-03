@@ -9,6 +9,10 @@ namespace YPlanning.Helper
         public MappingProfiles()
         {
             CreateMap<User, UserDto>();
+            CreateMap<Test, TestDto>();
+            CreateMap<Class, ClassDto>();
+            CreateMap<Account, AccountDto>();
+            CreateMap<Attendance, AttendanceDto>();
         }
     }
 }

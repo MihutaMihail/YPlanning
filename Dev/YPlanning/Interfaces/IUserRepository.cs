@@ -5,8 +5,7 @@ namespace YPlanning.Interfaces
     public interface IUserRepository
     {
         ICollection<User> GetUsers();
-        User GetUser(int id);
-        // User GetUser(Account account);
+        User GetUserById(int id);
         bool UserExists(int id);
     }
 }

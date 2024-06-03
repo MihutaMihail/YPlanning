@@ -20,31 +20,31 @@ namespace YPlanning.Controllers
         }
         
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(IEnumerable<User>))]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<UserDto>))]
         public IActionResult GetUsers() 
         {
-            var users = _mapper.Map<List<UserDto>>(_userRepository.GetUsers());
+            var usersDto = _mapper.Map<List<UserDto>>(_userRepository.GetUsers());
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             
-            return Ok(users);
+            return Ok(usersDto);
         }
 
         [HttpGet("{userId}")]
-        [ProducesResponseType(200, Type = typeof(User))]
+        [ProducesResponseType(200, Type = typeof(UserDto))]
         [ProducesResponseType(400)]
         public IActionResult GetUser(int userId)
         {
             if (!_userRepository.UserExists(userId))
                 return NotFound();
 
-            var user = _mapper.Map<UserDto>(_userRepository.GetUser(userId));
+            var userDto = _mapper.Map<UserDto>(_userRepository.GetUserById(userId));
             
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            return Ok(user);
+            return Ok(userDto);
         }
     }
 }

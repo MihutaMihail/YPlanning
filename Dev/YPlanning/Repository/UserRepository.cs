@@ -15,22 +15,22 @@ namespace YPlanning.Repository
 
         public ICollection<User> GetUsers()
         {
-            return _context.Users?.OrderBy(u => u.Id).ToList() ?? new List<User>();
+            return _context.Users?
+                .OrderBy(u => u.Id)
+                .ToList() ?? new List<User>();
         }
 
-        public User GetUser(int id)
+        public User GetUserById(int id)
         {
-            return _context.Users?.Where(u => u.Id == id).FirstOrDefault() ?? new User();
+            return _context.Users?
+                .Where(u => u.Id == id)
+                .FirstOrDefault() ?? new User();
         }
-
-        /*public User GetUser(Account account)
-        {
-            return _context.Users?.Where(u => u.Account == account).FirstOrDefault() ?? new User();
-        }*/
 
         public bool UserExists(int id)
         {
-            return _context.Users?.Any(u => u.Id == id) ?? false;
+            return _context.Users?
+                .Any(u => u.Id == id) ?? false;
         }
     }
 }
