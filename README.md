@@ -59,5 +59,8 @@ You may need to restart your browser, sometimes chrome (or perhaps another brows
 - What to expect from these endpoint
 - Maybe a high-level flow
 
+at the end (or somewhere else idk) put a link to the Postman collection so that the user can download the file and import it into their own Postman for testing.
+[Postman Collection](Documentation/YPlanning.postman_collection.json)
+
 ## API Documentation
 - Add "refer to **api_doc**" 

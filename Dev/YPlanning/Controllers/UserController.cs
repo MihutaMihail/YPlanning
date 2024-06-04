@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using YPlanning.Interfaces;
-using YPlanning.Models;
 using YPlanning.Dto;
 
 namespace YPlanning.Controllers

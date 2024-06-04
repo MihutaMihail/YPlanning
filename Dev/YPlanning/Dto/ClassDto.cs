@@ -11,12 +11,12 @@ namespace YPlanning.Dto
         public string? Subject { get; set; }
 
         [Column("classdate")]
-        public DateOnly ClassDate { get; set; }
+        public DateTime ClassDate { get; set; }
 
-        [Column("startime")]
-        public TimeOnly StartTime { get; set; }
+        [Column("starttime")]
+        public TimeSpan StartTime { get; set; }
 
         [Column("endtime")]
-        public TimeOnly EndTime { get; set; }
+        public TimeSpan EndTime { get; set; }
     }
 }

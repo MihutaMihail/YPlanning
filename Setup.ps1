@@ -118,17 +118,23 @@ function Run-PostgreSQL {
 }
 
 function Execute-PostgreSQL {
-    Write-Host "Executing SQL scripts phase..."
     Write-Host "Waiting for 15 seconds for the server to start..."
     Start-Sleep -s 15
 
+    Write-Host "Executing SQL scripts phase..."
+
     $containerName = "postgres"
     $dbFile = "schema.sql"
+    $seedFile = "seed.sql"
     $dbName = "yplanning"
 
     # Copy database file
     Write-Host "Copy database file..."
     Invoke-Expression "docker cp $APP_SETUP_PATH/$dbFile ${containerName}:/tmp/$dbFile"
+
+    # Copy seed file
+    Write-Host "Copy seed file..."
+    Invoke-Expression "docker cp $APP_SETUP_PATH/$seedFile ${containerName}:/tmp/$seedFile"
 
     # Create database
     Write-Host "Create database..."
@@ -139,6 +145,10 @@ function Execute-PostgreSQL {
     # Creates tables
     Write-Host "Create tables..."
     Invoke-Expression "docker exec -it $containerName psql -U postgres -d $dbName -f /tmp/$dbFile"
+
+    # Seeding
+    Write-Host "Seeding..."
+    Invoke-Expression "docker exec -it $containerName psql -U postgres -d $dbName -f /tmp/$seedFile"
 }
 
 # /*-----------------------------------

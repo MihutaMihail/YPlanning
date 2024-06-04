@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using YPlanning.Interfaces;
-using YPlanning.Models;
 using YPlanning.Dto;
 
 namespace YPlanning.Controllers
@@ -31,7 +30,7 @@ namespace YPlanning.Controllers
             return Ok(accountsDto);
         }
 
-        [HttpGet]
+        [HttpGet("{accountId}")]
         [ProducesResponseType(200, Type = typeof(AccountDto))]
         [ProducesResponseType(400)]
         public IActionResult GetAccount(int accountId)

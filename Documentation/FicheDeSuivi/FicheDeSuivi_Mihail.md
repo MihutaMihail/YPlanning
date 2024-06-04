@@ -10,6 +10,7 @@
 - [**01/06/2024**](#01062024)
 - [**02/06/2024**](#02062024)
 - [**03/06/2024**](#03062024)
+- [**04/06/2024**](#04062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -82,3 +83,10 @@ Pour finir, j'ai dû indiqué à entity framework d'utiliser des miniscules pour
 Endpoint créer pour avoir un utilisateur par son id. Ajout du AutoMapper pour plus facilement utiliser des Dto (data transfer object). Vu qu'on a du spécifié dans les modèles les relations entre les tables (ex: le modèle USER a une colonne Account parce qu'il est en relation avec la table Account: relation 1-1), on ne veut pas envoyer ces données qu'on on accède un endpoint comme api/user ou api/user/{userId}. Avec les Dto, on peut spécifier ce qu'on veut envoyer et le AutoMapper va faire ceci automatiquement. Comme ça, quand on accède un endpoint comme api/user, on nous envoie que les colonnes qu'on a choisi. Avec ceci, on peut aussi créer des multiples Dto pour la même entité. On peut avoir un BasicUserDto qui va nous montrer juste les détailles basiques d'un user, mais si on est connecté avec notre compte, on va nous montrer le dto FullUserDto par exemple qui va nous afficher tous les détailles comme notre id, notre rôle, etc.
 
 Tous les endpoints fait pour User ont été fait pour les autres entités restantes.
+
+## 04/06/2024
+Un fichier seed.sql qui insért quelques données dans la base de données a été fait.
+
+J'ai testé tous les endpoints (pour le moment j'ai que les GET all ou GET by id) pour tous les entités dans Postman. (quelques problèmes bien sûr, rien ne fonctionne du premier coup)
+
+Une collection Postman a aussi été exporté et ajouté dans le projet pour avoir tous les tests nécessaires. La collection va être mis à jour une fois que plusieurs endpoints de l'API vont être créer.

@@ -14,10 +14,10 @@ namespace YPlanning.Models
         public string? Password { get; set; }
 
         [Column("accountcreationdate")]
-        public DateTime? AccountCreationDate { get; set; }
+        public DateTime AccountCreationDate { get; set; }
 
         [Column("lastlogindate")]
-        public DateTime? LastLoginDate { get; set; }
+        public DateTime LastLoginDate { get; set; }
 
         [Column("userid")]
         public int UserId { get; set; }
