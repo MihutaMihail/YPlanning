@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using YPlanning.Interfaces;
 using YPlanning.Dto;
+using YPlanning.Models;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace YPlanning.Controllers
 {
@@ -44,6 +46,38 @@ namespace YPlanning.Controllers
                 return BadRequest(ModelState);
 
             return Ok(userDto);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public IActionResult CreateUser([FromBody] UserDto userCreate)
+        {
+            if (userCreate == null)
+                return BadRequest("User cannot be null");
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            var existingUser = _userRepository.GetUsers()
+                .Where(u => u.LastName?.Trim().ToUpper() == userCreate.LastName?.Trim().ToUpper())
+                .FirstOrDefault();
+
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("", "User already exists");
+                return StatusCode(422, ModelState);
+            }
+
+            var userMap = _mapper.Map<User>(userCreate);
+
+            if (!_userRepository.CreateUser(userMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+            
+            return Ok("Successfully created user");
         }
     }
 }

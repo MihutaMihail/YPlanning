@@ -11,6 +11,7 @@
 - [**02/06/2024**](#02062024)
 - [**03/06/2024**](#03062024)
 - [**04/06/2024**](#04062024)
+- [**05/06/2024**](#05062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -90,3 +91,6 @@ Un fichier seed.sql qui insért quelques données dans la base de données a ét
 J'ai testé tous les endpoints (pour le moment j'ai que les GET all ou GET by id) pour tous les entités dans Postman. (quelques problèmes bien sûr, rien ne fonctionne du premier coup)
 
 Une collection Postman a aussi été exporté et ajouté dans le projet pour avoir tous les tests nécessaires. La collection va être mis à jour une fois que plusieurs endpoints de l'API vont être créer.
+
+## 05/06/2024
+Le POST CreateUser() a été réalisé. Je vais devoir probablement ajouter / supprimer quelques NOT NULL ou autre chose sur la base de données. Pour le moment, je vais faire le CRUD pour avoir une base et comprendre un peu plus comment créer l'API avec ces nouveaux outils et après je vais penser a voir comment je vais faire pour avoir quelque chose plus cohérent et potentiellement mettre en place un système d'authentification avec un token et bla bla bla.

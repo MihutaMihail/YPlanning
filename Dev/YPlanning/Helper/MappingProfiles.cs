@@ -8,7 +8,7 @@ namespace YPlanning.Helper
     {
         public MappingProfiles()
         {
-            CreateMap<User, UserDto>();
+            CreateMap<User, UserDto>().ReverseMap();
             CreateMap<Test, TestDto>();
             CreateMap<Class, ClassDto>();
             CreateMap<Account, AccountDto>();
