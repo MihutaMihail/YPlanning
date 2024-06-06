@@ -98,3 +98,6 @@ Le POST CreateUser() a été réalisé. Je vais devoir probablement ajouter / su
 
 ## 06/06/2024
 Tous les POST (avec tous les problèmes) ont été fait pour chaque entité.
+
+J'ai réussi a mettre swagger dans le conteneur Docker dans l'API sur swagger/index.html.
+Il fonctionner sur IIS Express mais comme j'ai changer assez vite sur Docker, il fonctionnait plus, mais c'est bon maintenant.
