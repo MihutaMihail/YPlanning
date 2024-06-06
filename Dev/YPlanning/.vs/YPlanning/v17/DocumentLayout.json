@@ -3,60 +3,92 @@
   "WorkspaceRootPath": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:repository\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\yplanning.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:yplanning.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:controllers\\classcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\dto\\accountdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:dto\\accountdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\dto\\attendancedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:dto\\attendancedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:dto\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\dto\\testdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:dto\\testdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\test.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\helper\\mappingprofiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:helper\\mappingprofiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\models\\class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:models\\class.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\dto\\classdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:dto\\classdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\repository\\testrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:repository\\testrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\interfaces\\iclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:interfaces\\iclassrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\interfaces\\iattendancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:interfaces\\iattendancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|c:\\users\\mariu\\desktop\\yplanning\\dev\\yplanning\\repository\\attendancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{091F63A4-3995-490F-B539-339389EB0B9E}|YPlanning.csproj|solutionrelative:repository\\attendancerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,185 +98,274 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Test.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Test.cs",
-              "RelativeDocumentMoniker": "Models\\Test.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Test.cs",
-              "RelativeToolTip": "Models\\Test.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T18:59:13.518Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T18:25:51.358Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Repository\\UserRepository.cs",
-              "RelativeDocumentMoniker": "Repository\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Repository\\UserRepository.cs",
-              "RelativeToolTip": "Repository\\UserRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T17:30:13.682Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IUserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Interfaces\\IUserRepository.cs",
-              "RelativeDocumentMoniker": "Interfaces\\IUserRepository.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Interfaces\\IUserRepository.cs",
-              "RelativeToolTip": "Interfaces\\IUserRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T17:29:59.827Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAAACUAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-01T17:01:00.72Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-02T11:36:31.491Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Attendance.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Attendance.cs",
-              "RelativeDocumentMoniker": "Models\\Attendance.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Attendance.cs",
-              "RelativeToolTip": "Models\\Attendance.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-01T16:43:31.679Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Class.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Class.cs",
-              "RelativeDocumentMoniker": "Models\\Class.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Class.cs",
-              "RelativeToolTip": "Models\\Class.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-01T16:43:14.262Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Account.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Account.cs",
-              "RelativeDocumentMoniker": "Models\\Account.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Account.cs",
-              "RelativeToolTip": "Models\\Account.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-01T16:43:12.316Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "DataContext.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Data\\DataContext.cs",
-              "RelativeDocumentMoniker": "Data\\DataContext.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Data\\DataContext.cs",
-              "RelativeToolTip": "Data\\DataContext.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAA4wBYAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-01T16:07:11.054Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "YPlanning.csproj",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\YPlanning.csproj",
-              "RelativeDocumentMoniker": "YPlanning.csproj",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\YPlanning.csproj",
-              "RelativeToolTip": "YPlanning.csproj",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-02T12:30:53.361Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "User.cs",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwYAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-01T16:19:59.738Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dockerfile",
               "RelativeDocumentMoniker": "Dockerfile",
               "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dockerfile",
               "RelativeToolTip": "Dockerfile",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-06-02T11:30:57.747Z"
+              "WhenOpened": "2024-06-06T19:32:33.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAADMAAAAAAAAAAAAqwE8AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:25:48.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Account.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "Models\\Account.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Account.cs",
+              "RelativeToolTip": "Models\\Account.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvxoAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:10:32.93Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\UserDto.cs",
+              "RelativeDocumentMoniker": "Dto\\UserDto.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\UserDto.cs",
+              "RelativeToolTip": "Dto\\UserDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:06:31.241Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "TestDto.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\TestDto.cs",
+              "RelativeDocumentMoniker": "Dto\\TestDto.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\TestDto.cs",
+              "RelativeToolTip": "Dto\\TestDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:06:29.632Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "AccountDto.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\AccountDto.cs",
+              "RelativeDocumentMoniker": "Dto\\AccountDto.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\AccountDto.cs",
+              "RelativeToolTip": "Dto\\AccountDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvxsAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T18:44:52.032Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AttendanceDto.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\AttendanceDto.cs",
+              "RelativeDocumentMoniker": "Dto\\AttendanceDto.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\AttendanceDto.cs",
+              "RelativeToolTip": "Dto\\AttendanceDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvw0AAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T18:44:47.068Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AttendanceController.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\AttendanceController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AttendanceController.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\AttendanceController.cs",
+              "RelativeToolTip": "Controllers\\AttendanceController.cs",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAzwF0AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T18:44:46.158Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
+              "Title": "Attendance.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Attendance.cs",
+              "RelativeDocumentMoniker": "Models\\Attendance.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Attendance.cs",
+              "RelativeToolTip": "Models\\Attendance.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwkAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T18:44:40.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Test.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Test.cs",
+              "RelativeDocumentMoniker": "Models\\Test.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Test.cs",
+              "RelativeToolTip": "Models\\Test.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvw4AAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T18:44:16.468Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAAFIAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T15:50:45.722Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAiwC8AAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T18:48:30.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ClassController.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\ClassController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClassController.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\ClassController.cs",
+              "RelativeToolTip": "Controllers\\ClassController.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAgwFgAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T16:42:12.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TestController.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\TestController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TestController.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Controllers\\TestController.cs",
+              "RelativeToolTip": "Controllers\\TestController.cs",
+              "ViewState": "AQIAADYAAAAAAAAAAAA1wFEAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:17:40.467Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "MappingProfiles.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Helper\\MappingProfiles.cs",
+              "RelativeDocumentMoniker": "Helper\\MappingProfiles.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Helper\\MappingProfiles.cs",
+              "RelativeToolTip": "Helper\\MappingProfiles.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-02T11:36:36.34Z"
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:03:55.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Data\\DataContext.cs",
+              "RelativeDocumentMoniker": "Data\\DataContext.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Data\\DataContext.cs",
+              "RelativeToolTip": "Data\\DataContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T19:03:53.19Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ClassDto.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\ClassDto.cs",
+              "RelativeDocumentMoniker": "Dto\\ClassDto.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Dto\\ClassDto.cs",
+              "RelativeToolTip": "Dto\\ClassDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T18:44:34.121Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Class.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Class.cs",
+              "RelativeDocumentMoniker": "Models\\Class.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Models\\Class.cs",
+              "RelativeToolTip": "Models\\Class.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T16:40:37.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "TestRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Repository\\TestRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\TestRepository.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Repository\\TestRepository.cs",
+              "RelativeToolTip": "Repository\\TestRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T18:44:08.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "IClassRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Interfaces\\IClassRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IClassRepository.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Interfaces\\IClassRepository.cs",
+              "RelativeToolTip": "Interfaces\\IClassRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T16:42:10.664Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IAttendanceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Interfaces\\IAttendanceRepository.cs",
+              "RelativeDocumentMoniker": "Interfaces\\IAttendanceRepository.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Interfaces\\IAttendanceRepository.cs",
+              "RelativeToolTip": "Interfaces\\IAttendanceRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T16:15:53.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "AttendanceRepository.cs",
+              "DocumentMoniker": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Repository\\AttendanceRepository.cs",
+              "RelativeDocumentMoniker": "Repository\\AttendanceRepository.cs",
+              "ToolTip": "C:\\Users\\mariu\\Desktop\\YPlanning\\Dev\\YPlanning\\Repository\\AttendanceRepository.cs",
+              "RelativeToolTip": "Repository\\AttendanceRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-06T16:15:51.503Z"
             }
           ]
         }

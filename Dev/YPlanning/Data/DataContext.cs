@@ -18,7 +18,7 @@ namespace YPlanning.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Explicitly specify the table names for all entities
+            // Specify the table names for all entities
             modelBuilder.Entity<User>().ToTable("users");
             modelBuilder.Entity<Account>().ToTable("accounts");
             modelBuilder.Entity<Class>().ToTable("classes");

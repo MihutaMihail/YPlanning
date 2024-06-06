@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using YPlanning.Data;
 using YPlanning.Interfaces;
 using YPlanning.Repository;
@@ -38,11 +38,19 @@ if (string.IsNullOrEmpty(POSTGRES_PASSWORD) || string.IsNullOrEmpty(POSTGRESS_IP
 // Build connection string
 var connectionString = $"Username=postgres;Password={POSTGRES_PASSWORD};Host={POSTGRESS_IP_ADDRESS};Port=5432;Database=yplanning";
 
-// Add services to the container
+// Add services
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+builder.Services.AddScoped<IClassRepository, ClassRepository>();
+builder.Services.AddScoped<ITestRepository, TestRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "YPlanning API", Version = "v1" });
+});
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseNpgsql(connectionString)
 );
@@ -65,11 +73,12 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "YPlanning API V1");
+    c.RoutePrefix = "swagger";
+});
 
 app.UseHttpsRedirection();
 app.UseAuthorization();

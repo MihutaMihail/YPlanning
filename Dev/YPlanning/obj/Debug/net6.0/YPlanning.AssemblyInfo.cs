@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YPlanning")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57198300864dc7c8fe6eaf8f3da5b30e483fce5e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e9d9bea3d0461cb53112ae60a346481a48a7054")]
 [assembly: System.Reflection.AssemblyProductAttribute("YPlanning")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YPlanning")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

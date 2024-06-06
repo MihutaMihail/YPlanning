@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YPlanning.Models
+namespace YPlanning.Dto
 {
-    public class Attendance
+    public class AttendanceDto
     {
         [Column("classid")]
         [Required(ErrorMessage = "Class id is required")]
@@ -19,8 +19,5 @@ namespace YPlanning.Models
 
         [Column("reason")]
         public string? Reason { get; set; }
-
-        public User? User { get; set; }
-        public Class? Class { get; set; }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YPlanning.Models
+namespace YPlanning.Dto
 {
-    public class Class
+    public class ClassDto
     {
         [Column("id")]
         public int Id { get; set; }
@@ -27,8 +27,5 @@ namespace YPlanning.Models
         [Column("room")]
         [Required(ErrorMessage = "Room is required")]
         public string? Room { get; set; }
-
-        public ICollection<Attendance>? Attendances { get; set; }
-        public ICollection<Test>? Tests { get; set; }
     }
 }

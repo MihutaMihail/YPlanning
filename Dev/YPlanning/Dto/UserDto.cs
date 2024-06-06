@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace YPlanning.Models
+namespace YPlanning.Dto
 {
-    public class User
+    public class UserDto
     {
         [Column("id")]
         public int Id { get; set; }
@@ -31,9 +31,5 @@ namespace YPlanning.Models
         [Column("role")]
         [Required(ErrorMessage = "Role is required")]
         public string? Role { get; set; }
-
-        public Account? Account { get; set; }
-        public ICollection<Test>? Tests { get; set; }
-        public ICollection<Attendance>? Attendances { get; set; }
     }
 }

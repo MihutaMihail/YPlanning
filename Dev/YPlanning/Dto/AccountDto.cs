@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using YPlanning.Models;
 
-namespace YPlanning.Models
+namespace YPlanning.Dto
 {
-    public class Account
+    public class AccountDto
     {
         [Column("id")]
         public int Id { get; set; }
@@ -25,7 +26,5 @@ namespace YPlanning.Models
         [Column("userid")]
         [Required(ErrorMessage = "User id is required")]
         public int? UserId { get; set; }
-
-        public User? User { get; set; }
     }
 }
