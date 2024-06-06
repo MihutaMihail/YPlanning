@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YPlanning.Dto
 {
@@ -8,15 +9,23 @@ namespace YPlanning.Dto
         public int Id { get; set; }
 
         [Column("subject")]
+        [Required(ErrorMessage = "Subject is required")]
         public string? Subject { get; set; }
 
         [Column("classdate")]
-        public DateTime ClassDate { get; set; }
+        [Required(ErrorMessage = "Class date id is required")]
+        public DateTime? ClassDate { get; set; }
 
         [Column("starttime")]
-        public TimeSpan StartTime { get; set; }
+        [Required(ErrorMessage = "Start time is required")]
+        public TimeSpan? StartTime { get; set; }
 
         [Column("endtime")]
-        public TimeSpan EndTime { get; set; }
+        [Required(ErrorMessage = "End time is required")]
+        public TimeSpan? EndTime { get; set; }
+
+        [Column("room")]
+        [Required(ErrorMessage = "Room is required")]
+        public string? Room { get; set; }
     }
 }

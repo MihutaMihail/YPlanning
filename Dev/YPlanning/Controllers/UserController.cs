@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using YPlanning.Interfaces;
 using YPlanning.Dto;
 using YPlanning.Models;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace YPlanning.Controllers
 {
@@ -35,6 +34,7 @@ namespace YPlanning.Controllers
         [HttpGet("{userId}")]
         [ProducesResponseType(200, Type = typeof(UserDto))]
         [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public IActionResult GetUser(int userId)
         {
             if (!_userRepository.UserExists(userId))
@@ -51,24 +51,27 @@ namespace YPlanning.Controllers
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
         public IActionResult CreateUser([FromBody] UserDto userCreate)
         {
             if (userCreate == null)
                 return BadRequest("User cannot be null");
 
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
 
             var existingUser = _userRepository.GetUsers()
-                .Where(u => u.LastName?.Trim().ToUpper() == userCreate.LastName?.Trim().ToUpper())
+                .Where(u => u.Email?.Trim().ToUpper() == userCreate.Email?.Trim().ToUpper())
                 .FirstOrDefault();
 
             if (existingUser != null)
             {
                 ModelState.AddModelError("", "User already exists");
-                return StatusCode(422, ModelState);
+                return Conflict(ModelState);
             }
 
+            userCreate.BirthDate = userCreate.BirthDate?.ToUniversalTime();
             var userMap = _mapper.Map<User>(userCreate);
 
             if (!_userRepository.CreateUser(userMap))
@@ -77,7 +80,7 @@ namespace YPlanning.Controllers
                 return StatusCode(500, ModelState);
             }
             
-            return Ok("Successfully created user");
+            return Ok("User successfully created");
         }
     }
 }

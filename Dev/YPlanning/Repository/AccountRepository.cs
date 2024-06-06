@@ -32,5 +32,17 @@ namespace YPlanning.Repository
             return _context.Accounts?
                 .Any(ac => ac.Id == id) ?? false;
         }
+
+        public bool CreateAccount(Account accountCreate)
+        {
+            _context.Add(accountCreate);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
+        }
     }
 }

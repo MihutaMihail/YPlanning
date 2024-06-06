@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using YPlanning.Interfaces;
 using YPlanning.Dto;
+using YPlanning.Models;
 
 namespace YPlanning.Controllers
 {
@@ -33,6 +34,7 @@ namespace YPlanning.Controllers
         [HttpGet("{testId}")]
         [ProducesResponseType(200, Type = typeof(TestDto))]
         [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public IActionResult GetTest(int testId)
         {
             if (!_testRepository.TestExists(testId))
@@ -44,6 +46,40 @@ namespace YPlanning.Controllers
                 return BadRequest(ModelState);
             
             return Ok(testDto);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult CreateTest([FromBody] TestDto testCreate)
+        {
+            if (testCreate == null)
+                return BadRequest("Test cannot be null");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var existingTest = _testRepository.GetTests()
+                .Where(t => t.ClassId == testCreate.ClassId && t.UserId == testCreate.UserId)
+                .FirstOrDefault();
+
+            if (existingTest != null)
+            {
+                ModelState.AddModelError("", "Test already exists");
+                return Conflict(ModelState);
+            }
+
+            var testMap = _mapper.Map<Test>(testCreate);
+
+            if (!_testRepository.CreateTest(testMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Test succesfully created");
         }
     }
 }

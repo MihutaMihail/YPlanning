@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using YPlanning.Interfaces;
 using YPlanning.Dto;
+using YPlanning.Models;
+using YPlanning.Repository;
 
 namespace YPlanning.Controllers
 {
@@ -33,6 +35,7 @@ namespace YPlanning.Controllers
         [HttpGet("{accountId}")]
         [ProducesResponseType(200, Type = typeof(AccountDto))]
         [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public IActionResult GetAccount(int accountId)
         {
             if (!_accountRepository.AccountExists(accountId))
@@ -44,6 +47,40 @@ namespace YPlanning.Controllers
                 return BadRequest(ModelState);
 
             return Ok(accountDto);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult CreateAccount([FromBody] AccountDto accountCreate)
+        {
+            if (accountCreate == null)
+                return BadRequest("Account cannot be null");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var existingAccount = _accountRepository.GetAccounts()
+                .Where(ac => ac.UserId == accountCreate.UserId)
+                .FirstOrDefault();
+
+            if (existingAccount != null)
+            {
+                ModelState.AddModelError("", "Account already exists");
+                return Conflict(ModelState);
+            }
+
+            var accountMap = _mapper.Map<Account>(accountCreate);
+
+            if (!_accountRepository.CreateAccount(accountMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Account successfully created");
         }
     }
 }

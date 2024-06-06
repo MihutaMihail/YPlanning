@@ -7,5 +7,7 @@ namespace YPlanning.Interfaces
         ICollection<Account> GetAccounts();
         Account GetAccountById(int id);
         bool AccountExists(int id);
+        bool CreateAccount(Account newAccount);
+        bool Save();
     }
 }

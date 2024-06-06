@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using YPlanning.Interfaces;
 using YPlanning.Dto;
+using YPlanning.Models;
+using YPlanning.Repository;
 
 namespace YPlanning.Controllers
 {
@@ -33,6 +35,7 @@ namespace YPlanning.Controllers
         [HttpGet("{userId}/classes")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ClassDto>))]
         [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public IActionResult GetClassesByUserId(int userId)
         {
             var classes = _mapper.Map<List<ClassDto>>(_attendanceRepository.GetClassesByUserId(userId));
@@ -46,6 +49,7 @@ namespace YPlanning.Controllers
         [HttpGet("{classId}/users")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<UserDto>))]
         [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public IActionResult GetUsersByClassId(int classId)
         {
             var users = _mapper.Map<List<UserDto>>(_attendanceRepository.GetUsersByClassId(classId));
@@ -54,6 +58,40 @@ namespace YPlanning.Controllers
                 return BadRequest(ModelState);
 
             return Ok(users);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult CreateAttendance([FromBody] AttendanceDto attendanceCreate)
+        {
+            if (attendanceCreate == null)
+                return BadRequest("Attendance cannot be null");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var existingAttendance = _attendanceRepository.GetAttendances()
+                .Where(at => at.ClassId == attendanceCreate.ClassId && at.UserId == attendanceCreate.UserId)
+                .FirstOrDefault();
+
+            if (existingAttendance != null)
+            {
+                ModelState.AddModelError("", "Attendance already exists");
+                return Conflict(ModelState);
+            }
+
+            var attendanceMap = _mapper.Map<Attendance>(attendanceCreate);
+
+            if (!_attendanceRepository.CreateAttendance(attendanceMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok("Attendance successfully created");
         }
     }
 }

@@ -18,7 +18,7 @@ namespace YPlanning.Models
 
         [Column("birthdate")]
         [Required(ErrorMessage = "Birth date is required")]
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         [Column("email")]
         [Required(ErrorMessage = "Email is required")]
@@ -29,6 +29,7 @@ namespace YPlanning.Models
         public string? PhoneNumber { get; set; }
 
         [Column("role")]
+        [Required(ErrorMessage = "Role is required")]
         public string? Role { get; set; }
 
         public Account? Account { get; set; }

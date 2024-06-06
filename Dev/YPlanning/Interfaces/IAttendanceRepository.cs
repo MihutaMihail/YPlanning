@@ -7,6 +7,8 @@ namespace YPlanning.Interfaces
         ICollection<Attendance> GetAttendances();
         ICollection<User> GetUsersByClassId(int classId);
         ICollection<Class> GetClassesByUserId(int userId);
-        bool AttedanceExists(int classId, int userId);
+        bool AttendanceExists(int classId, int userId);
+        bool CreateAttendance(Attendance attendanceCreate);
+        bool Save();
     }
 }

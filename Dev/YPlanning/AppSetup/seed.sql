@@ -6,9 +6,9 @@ INSERT INTO ACCOUNTS (login, password, accountCreationDate, lastLoginDate, userI
 ('john.doe', 'password123', '2024-01-01', '2024-01-10', 1),
 ('jane.smith', 'securepass', '2024-01-05', '2024-01-15', 2);
 
-INSERT INTO CLASSES (subject, classDate, startTime, endTime) VALUES 
-('Mathematics', '2024-06-01', '09:00:00'::time, '10:30:00'::time),
-('History', '2024-06-02', '11:00:00'::time, '12:30:00'::time);
+INSERT INTO CLASSES (subject, classDate, startTime, endTime, room) VALUES 
+('Mathematics', '2024-06-01', '09:00:00', '10:30:00', '501'),
+('History', '2024-06-02', '11:00:00', '12:30:00', '402');
 
 INSERT INTO ATTENDANCES (classId, userId, status, reason) VALUES 
 (1, 1, 'Present', NULL),

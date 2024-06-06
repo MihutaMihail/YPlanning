@@ -5,7 +5,7 @@ CREATE TABLE USERS(
    birthDate DATE NOT NULL,
    email VARCHAR(100) NOT NULL,
    phoneNumber VARCHAR(15),
-   role VARCHAR(50),
+   role VARCHAR(50) NOT NULL,
    PRIMARY KEY (id)
 );
 
@@ -26,6 +26,7 @@ CREATE TABLE CLASSES(
    classDate DATE NOT NULL,
    startTime TIME NOT NULL,
    endTime TIME NOT NULL,
+   room VARCHAR(10) NOT NULL,
    PRIMARY KEY(id)
 );
 

@@ -39,10 +39,22 @@ namespace YPlanning.Repository
                 .ToList() ?? new List<User>();
         }
 
-        public bool AttedanceExists(int classId, int userId)
+        public bool AttendanceExists(int classId, int userId)
         {
             return _context.Attendances?.Any(uc => uc.UserId == userId && uc.ClassId == classId) ?? false;
 
+        }
+
+        public bool CreateAttendance(Attendance attendanceCreate)
+        {
+            _context.Add(attendanceCreate);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
     }
 }

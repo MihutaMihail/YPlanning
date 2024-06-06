@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YPlanning.Models
 {
@@ -8,19 +9,22 @@ namespace YPlanning.Models
         public int Id { get; set; }
 
         [Column("login")]
+        [Required(ErrorMessage = "Login is required")]
         public string? Login { get; set; }
 
         [Column("password")]
+        [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
 
         [Column("accountcreationdate")]
-        public DateTime AccountCreationDate { get; set; }
+        public DateTime? AccountCreationDate { get; set; }
 
         [Column("lastlogindate")]
-        public DateTime LastLoginDate { get; set; }
+        public DateTime? LastLoginDate { get; set; }
 
         [Column("userid")]
-        public int UserId { get; set; }
+        [Required(ErrorMessage = "User id is required")]
+        public int? UserId { get; set; }
 
         public User? User { get; set; }
     }
