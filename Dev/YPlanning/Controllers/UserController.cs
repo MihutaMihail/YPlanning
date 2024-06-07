@@ -49,7 +49,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
@@ -81,6 +81,40 @@ namespace YPlanning.Controllers
             }
             
             return Ok("User successfully created");
+        }
+
+        [HttpPut("{userId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateUser(int userId, [FromBody] UserDto updatedUser)
+        {
+            if (updatedUser == null)
+                return BadRequest("User cannot be null");
+
+            if (updatedUser.Id != 0 && userId != updatedUser.Id)
+                return BadRequest("Ids are not matching");
+            
+            if (!_userRepository.UserExists(userId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            updatedUser.Id = userId;
+            updatedUser.BirthDate = updatedUser.BirthDate?.ToUniversalTime();
+
+            var userMap = _mapper.Map<User>(updatedUser);
+
+            if (!_userRepository.UpdateUser(userMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }

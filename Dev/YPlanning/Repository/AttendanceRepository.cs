@@ -45,9 +45,15 @@ namespace YPlanning.Repository
 
         }
 
-        public bool CreateAttendance(Attendance attendanceCreate)
+        public bool CreateAttendance(Attendance createAttendance)
         {
-            _context.Add(attendanceCreate);
+            _context.Add(createAttendance);
+            return Save();
+        }
+
+        public bool UpdateAttendance(Attendance updatedAttendance)
+        {
+            _context.Update(updatedAttendance);
             return Save();
         }
 

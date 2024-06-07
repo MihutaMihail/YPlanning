@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using YPlanning.Interfaces;
 using YPlanning.Dto;
 using YPlanning.Models;
+using YPlanning.Repository;
 
 namespace YPlanning.Controllers
 {
@@ -49,7 +50,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
@@ -80,6 +81,39 @@ namespace YPlanning.Controllers
             }
 
             return Ok("Test succesfully created");
+        }
+
+        [HttpPut("{testId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateTest(int testId, [FromBody] TestDto updatedTest)
+        {
+            if (updatedTest == null)
+                return BadRequest("Test cannot be null");
+
+            if (updatedTest.Id != 0 && testId != updatedTest.Id)
+                return BadRequest("Ids are not matching");
+
+            if (!_testRepository.TestExists(testId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
+            updatedTest.Id = testId;
+
+            var testMap = _mapper.Map<Test>(updatedTest);
+
+            if (!_testRepository.UpdateTest(testMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }

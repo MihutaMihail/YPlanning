@@ -33,9 +33,15 @@ namespace YPlanning.Repository
                 .Any(c => c.Id == id) ?? false;
         }
 
-        public bool CreateClass(Class classCreate)
+        public bool CreateClass(Class createClass)
         {
-            _context.Add(classCreate);
+            _context.Add(createClass);
+            return Save();
+        }
+
+        public bool UpdateClass(Class updatedClass)
+        {
+            _context.Update(updatedClass);
             return Save();
         }
 

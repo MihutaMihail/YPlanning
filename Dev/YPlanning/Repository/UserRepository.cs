@@ -34,12 +34,18 @@ namespace YPlanning.Repository
                 .Any(u => u.Id == id) ?? false;
         }
 
-        public bool CreateUser(User userCreate)
+        public bool CreateUser(User createUser)
         {
-            _context.Add(userCreate);
+            _context.Add(createUser);
             return Save();
         }
         
+        public bool UpdateUser(User updatedUser)
+        {
+            _context.Update(updatedUser);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

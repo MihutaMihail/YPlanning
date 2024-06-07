@@ -7,7 +7,8 @@ namespace YPlanning.Interfaces
         ICollection<User> GetUsers();
         User GetUserById(int id);
         bool UserExists(int id);
-        bool CreateUser(User userCreate);
+        bool CreateUser(User createUser);
+        bool UpdateUser(User updatedUser);
         bool Save();
     }
 }

@@ -61,7 +61,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
@@ -92,6 +92,42 @@ namespace YPlanning.Controllers
             }
 
             return Ok("Attendance successfully created");
+        }
+
+        [HttpPut("{classId}/{userId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateAttendance(int classId, int userId, [FromBody] AttendanceDto updatedAttendance)
+        {
+            if (updatedAttendance == null)
+                return BadRequest("Attendance cannot be null");
+
+            if (updatedAttendance.ClassId != 0 && classId != updatedAttendance.ClassId)
+                return BadRequest("Class ids are not matching");
+            if (updatedAttendance.UserId != 0 && userId != updatedAttendance.UserId)
+                return BadRequest("User ids are not matching");
+
+            if (!_attendanceRepository.AttendanceExists(classId, userId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            updatedAttendance.ClassId = classId;
+            updatedAttendance.UserId = userId;
+
+            var attendanceMap = _mapper.Map<Attendance>(updatedAttendance);
+
+            if (!_attendanceRepository.UpdateAttendance(attendanceMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }

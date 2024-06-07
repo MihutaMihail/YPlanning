@@ -50,7 +50,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
@@ -81,6 +81,39 @@ namespace YPlanning.Controllers
             }
 
             return Ok("Account successfully created");
+        }
+
+        [HttpPut("{accountId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateAccount(int accountId, [FromBody] AccountDto updatedAccount)
+        {
+            if (updatedAccount == null)
+                return BadRequest("Account cannot be null");
+
+            if (updatedAccount.Id != 0 && accountId != updatedAccount.Id)
+                return BadRequest("Ids are not matching");
+
+            if (!_accountRepository.AccountExists(accountId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            updatedAccount.Id = accountId;
+
+            var accountMap = _mapper.Map<Account>(updatedAccount);
+
+            if (!_accountRepository.UpdateAccount(accountMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }

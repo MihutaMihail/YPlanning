@@ -13,6 +13,7 @@
 - [**04/06/2024**](#04062024)
 - [**05/06/2024**](#05062024)
 - [**06/06/2024**](#06062024)
+- [**07/06/2024**](#07062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -101,3 +102,6 @@ Tous les POST (avec tous les problèmes) ont été fait pour chaque entité.
 
 J'ai réussi a mettre swagger dans le conteneur Docker dans l'API sur swagger/index.html.
 Il fonctionner sur IIS Express mais comme j'ai changer assez vite sur Docker, il fonctionnait plus, mais c'est bon maintenant.
+
+## 07/06/2024
+PUT endpoint ont été faite pour tous les entités.

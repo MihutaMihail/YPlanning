@@ -50,7 +50,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(204)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
@@ -87,6 +87,40 @@ namespace YPlanning.Controllers
             }
 
             return Ok("Class successfully created");
+        }
+
+        [HttpPut("{classId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(409)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateClass(int classId, [FromBody] ClassDto updatedClass)
+        {
+            if (updatedClass == null)
+                return BadRequest("Class cannot be null");
+
+            if (updatedClass.Id != 0 && classId != updatedClass.Id)
+                return BadRequest("Ids are not matching");
+
+            if (!_classRepository.ClassExists(classId))
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            updatedClass.Id = classId;
+            updatedClass.ClassDate = updatedClass.ClassDate?.ToUniversalTime();
+            
+            var classMap = _mapper.Map<Class>(updatedClass);
+
+            if (!_classRepository.UpdateClass(classMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
         }
     }
 }
