@@ -10,6 +10,7 @@ namespace YPlanning.Interfaces
         bool AttendanceExists(int classId, int userId);
         bool CreateAttendance(Attendance createAttendance);
         bool UpdateAttendance(Attendance updatedAttendance);
+        bool DeleteAttendance(Attendance deleteAttendance);
         bool Save();
     }
 }

@@ -46,6 +46,12 @@ namespace YPlanning.Repository
             return Save();
         }
 
+        public bool DeleteUser(User deleteUser)
+        {
+            _context.Remove(deleteUser);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

@@ -30,7 +30,7 @@ namespace YPlanning.Data
                 .HasOne(u => u.Account)
                 .WithOne(ac => ac.User)
                 .HasForeignKey<Account>(ac => ac.UserId);
-
+            
             // One-to-many relationship between User and Tests
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Tests)

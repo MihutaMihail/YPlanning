@@ -9,6 +9,7 @@ namespace YPlanning.Interfaces
         bool TestExists(int id);
         bool CreateTest(Test createTest);
         bool UpdateTest(Test updatedTest);
+        bool DeleteTest(Test deleteTest);
         bool Save();
     }
 }

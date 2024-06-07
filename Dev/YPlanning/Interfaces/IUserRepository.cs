@@ -9,6 +9,7 @@ namespace YPlanning.Interfaces
         bool UserExists(int id);
         bool CreateUser(User createUser);
         bool UpdateUser(User updatedUser);
+        bool DeleteUser(User deleteUser);
         bool Save();
     }
 }

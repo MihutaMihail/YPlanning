@@ -6,6 +6,7 @@ namespace YPlanning.Models
     public class Test
     {
         [Column("id")]
+        [Key]
         public int Id { get; set; }
 
         [Column("classid")]
@@ -20,7 +21,9 @@ namespace YPlanning.Models
         [Required(ErrorMessage = "Score is required")]
         public string? Score { get; set; }
 
+        [ForeignKey("ClassId")]
         public Class? Class { get; set; }
+        [ForeignKey("UserId")]
         public User? User { get; set; }
     }
 }

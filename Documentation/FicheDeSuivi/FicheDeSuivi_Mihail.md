@@ -105,3 +105,5 @@ Il fonctionner sur IIS Express mais comme j'ai changer assez vite sur Docker, il
 
 ## 07/06/2024
 PUT endpoint ont été faite pour tous les entités.
+
+J'ai commencé à faire tous les DELETE et j'ai avancé un peu mais j'ai pas encore finir a faire en sorte qu'une fois qu'on supprime un utilisateur, il faut aussi supprimer son compte, ses présences, etc. Par contre, l'action de juste supprimer fonctionne.

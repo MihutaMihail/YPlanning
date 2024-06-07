@@ -93,7 +93,6 @@ namespace YPlanning.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        [ProducesResponseType(409)]
         [ProducesResponseType(500)]
         public IActionResult UpdateClass(int classId, [FromBody] ClassDto updatedClass)
         {

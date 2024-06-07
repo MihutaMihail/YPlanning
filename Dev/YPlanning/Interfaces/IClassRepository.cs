@@ -9,6 +9,7 @@ namespace YPlanning.Interfaces
         bool ClassExists(int id);
         bool CreateClass(Class createClass);
         bool UpdateClass(Class updatedClass);
+        bool DeleteClass(Class deleteClass);
         bool Save();
     }
 }

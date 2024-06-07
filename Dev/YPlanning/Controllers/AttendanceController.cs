@@ -98,7 +98,6 @@ namespace YPlanning.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        [ProducesResponseType(409)]
         [ProducesResponseType(500)]
         public IActionResult UpdateAttendance(int classId, int userId, [FromBody] AttendanceDto updatedAttendance)
         {

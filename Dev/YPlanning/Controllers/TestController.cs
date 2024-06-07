@@ -87,7 +87,6 @@ namespace YPlanning.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        [ProducesResponseType(409)]
         [ProducesResponseType(500)]
         public IActionResult UpdateTest(int testId, [FromBody] TestDto updatedTest)
         {
@@ -115,5 +114,28 @@ namespace YPlanning.Controllers
 
             return NoContent();
         }
+
+        /*[HttpDelete("{testId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteTest(int testId)
+        {
+            if (!_testRepository.TestExists(testId))
+                return NotFound();
+
+            var testToDelete = _testRepository.GetTestById(testId);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_testRepository.DeleteTest(testToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting test");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }*/
     }
 }

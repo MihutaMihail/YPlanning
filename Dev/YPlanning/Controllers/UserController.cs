@@ -11,11 +11,13 @@ namespace YPlanning.Controllers
     public class UserController : Controller
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAccountRepository _accountRepository;
         private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository, IMapper mapper)
+        public UserController(IUserRepository userRepository, IAccountRepository accountRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _accountRepository = accountRepository;
             _mapper = mapper;
         }
         
@@ -87,7 +89,6 @@ namespace YPlanning.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        [ProducesResponseType(409)]
         [ProducesResponseType(500)]
         public IActionResult UpdateUser(int userId, [FromBody] UserDto updatedUser)
         {
@@ -111,6 +112,36 @@ namespace YPlanning.Controllers
             if (!_userRepository.UpdateUser(userMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{userId}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteUser(int userId)
+        {
+            if (!_userRepository.UserExists(userId))
+                return NotFound();
+
+            var accountToDelete = _accountRepository.GetAccountByUserId(userId);
+            var userToDelete = _userRepository.GetUserById(userId);
+            
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_accountRepository.DeleteAccount(accountToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting account");
+                return StatusCode(500, ModelState);
+            }
+
+            if (!_userRepository.DeleteUser(userToDelete))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting user");
                 return StatusCode(500, ModelState);
             }
 

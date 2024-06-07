@@ -27,6 +27,13 @@ namespace YPlanning.Repository
                 .FirstOrDefault() ?? new Account();
         }
 
+        public Account GetAccountByUserId(int userId)
+        {
+            return _context.Accounts?
+                .Where(ac => ac.UserId == userId)
+                .FirstOrDefault() ?? new Account();
+        }
+
         public bool AccountExists(int id)
         {
             return _context.Accounts?
@@ -42,6 +49,12 @@ namespace YPlanning.Repository
         public bool UpdateAccount(Account updatedAccount)
         {
             _context.Update(updatedAccount);
+            return Save();
+        }
+
+        public bool DeleteAccount(Account deleteAccount)
+        {
+            _context.Remove(deleteAccount);
             return Save();
         }
 

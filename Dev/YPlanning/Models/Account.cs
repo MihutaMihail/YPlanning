@@ -6,6 +6,7 @@ namespace YPlanning.Models
     public class Account
     {
         [Column("id")]
+        [Key]
         public int Id { get; set; }
 
         [Column("login")]
@@ -26,6 +27,7 @@ namespace YPlanning.Models
         [Required(ErrorMessage = "User id is required")]
         public int? UserId { get; set; }
 
+        [ForeignKey("UserId")]
         public User? User { get; set; }
     }
 }

@@ -57,6 +57,11 @@ namespace YPlanning.Repository
             return Save();
         }
 
+        public bool DeleteAttendance(Attendance deleteAttendance) {
+            _context.Remove(deleteAttendance);
+            return Save();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();
