@@ -406,5 +406,5 @@ conception/LoopingImage.jpg
 *.vpp*
 
 # machines virtuelles
-.vm*
-./infra/serveur*
+*.vm*
+infra/serveurmail/*
