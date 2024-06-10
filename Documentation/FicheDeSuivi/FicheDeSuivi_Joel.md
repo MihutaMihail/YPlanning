@@ -10,3 +10,7 @@ Mon binôme et moi avons réalisé le MCD, on a quelque chose de tangible
 * jour 2
 Je fais le schéma de l'infrastructure réseau
  plus tard je créerais à créer les différentes machines virtuelles qui vont faire office de serveurs.
+
+* jour 8
+modification du MCD
+ 

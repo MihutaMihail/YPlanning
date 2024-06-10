@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Foundry>
+<VM>
+<VMId type="string">52 bb 6b 40 4e 40 2a f5-08 b9 8b e1 2e 5e 6e f5</VMId>
+<ClientMetaData>
+<clientMetaDataAttributes/>
+<HistoryEventList/></ClientMetaData>
+<vmxPathName type="string">MailServer.vmx</vmxPathName></VM></Foundry>
