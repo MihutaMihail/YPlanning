@@ -30,24 +30,40 @@ namespace YPlanning.Data
                 .HasOne(u => u.Account)
                 .WithOne(ac => ac.User)
                 .HasForeignKey<Account>(ac => ac.UserId);
-
+            
             // One-to-many relationship between User and Tests
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Tests)
                 .WithOne(t => t.User)
                 .HasForeignKey(t => t.UserId);
 
-            // Many-to-many relationship for Attendaces between User and Class
+            // Define primary key for Attendance
             modelBuilder.Entity<Attendance>()
-                .HasKey(at => new { at.UserId, at.ClassId });
+                .HasKey(at => at.Id);
+
+            // Define foreign key relationships
             modelBuilder.Entity<Attendance>()
-                .HasOne(u => u.User)
-                .WithMany(at => at.Attendances)
+                .HasOne(at => at.User)
+                .WithMany(u => u.Attendances)
                 .HasForeignKey(u => u.UserId);
             modelBuilder.Entity<Attendance>()
-                .HasOne(c => c.Class)
-                .WithMany(at => at.Attendances)
+                .HasOne(at => at.Class)
+                .WithMany(c => c.Attendances)
                 .HasForeignKey(c => c.ClassId);
+
+            // Define primary key for Test
+            modelBuilder.Entity<Test>()
+                .HasKey(t => t.Id);
+
+            // Define foreign key relationships
+            modelBuilder.Entity<Test>()
+                .HasOne(t => t.User)
+                .WithMany(u => u.Tests)
+                .HasForeignKey(t => t.UserId);
+            modelBuilder.Entity<Test>()
+                .HasOne(t => t.Class)
+                .WithMany(c => c.Tests)
+                .HasForeignKey(t => t.ClassId);
         }
     }
 }

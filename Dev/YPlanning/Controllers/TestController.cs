@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using YPlanning.Interfaces;
-using YPlanning.Dto;
 using YPlanning.Models;
+using YPlanning.Interfaces.Services;
+using YPlanning.Dto;
 
 namespace YPlanning.Controllers
 {
@@ -10,46 +10,89 @@ namespace YPlanning.Controllers
     [ApiController]
     public class TestController : Controller
     {
-        private readonly ITestRepository _testRepository;
+        private readonly ITestService _testService;
         private readonly IMapper _mapper;
 
-        public TestController(ITestRepository testRepository, IMapper mapper)
+        public TestController(ITestService testService, IMapper mapper)
         {
-            _testRepository = testRepository;
+            _testService = testService;
             _mapper = mapper;
         }
-
+        
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<TestDto>))]
-        public IActionResult GetTests()
+        public IActionResult GetTests() 
         {
-            var testsDto = _mapper.Map<List<TestDto>>(_testRepository.GetTests());
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
+            var tests = _testService.GetTests();
+            var testsDto= _mapper.Map<List<TestDto>>(tests);
+            
             return Ok(testsDto);
         }
-
-        [HttpGet("{testId}")]
+        
+        [HttpGet("{testId:int}")]
         [ProducesResponseType(200, Type = typeof(TestDto))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(404)]
-        public IActionResult GetTest(int testId)
+        public IActionResult GetTestByid(int? testId)
         {
-            if (!_testRepository.TestExists(testId))
+            if (testId == null)
+                return BadRequest("Test ID cannot be null");
+
+            if (!_testService.DoesTestExistById(testId))
                 return NotFound();
 
-            var testDto = _mapper.Map<TestDto>(_testRepository.GetTestById(testId));
+            var test = _testService.GetTestById(testId);
+            var testDto = _mapper.Map<TestDto>(test);
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            return Ok(testDto);
+        }
+        
+        [HttpGet("{classId:int}/{userId:int}")]
+        [ProducesResponseType(200, Type = typeof(TestDto))]
+        public IActionResult GetTestByClassAndUserId(int? classId, int? userId)
+        {
+            if (classId == null || userId == null)
+                return BadRequest("Class / User ID cannot be null");
+            
+            if (!_testService.DoesTestExistByClassAndUserId(classId, userId))
+                return NotFound();
+
+            var test = _testService.GetTestByClassAndUserId(classId, userId);
+            var testDto = _mapper.Map<TestDto>(test);
             
             return Ok(testDto);
         }
+        
+        [HttpGet("{userId:int}/classes")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ClassDto>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult GetClassesByUserId(int? userId)
+        {
+            if (userId == null)
+                return BadRequest("User ID cannot be null");
+            
+            var classes = _testService.GetClassesByUserId(userId);
+            var classesDto = _mapper.Map<List<ClassDto>>(classes);
+           
+            return Ok(classesDto);
+        }
+
+        [HttpGet("{classId:int}/users")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<UserDto>))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult GetUsersByClassId(int? classId)
+        {
+            if (classId == null)
+                return BadRequest("Class ID cannot be null");
+            
+            var users = _testService.GetUsersByClassId(classId);
+            var usersDto = _mapper.Map<List<UserDto>>(users);
+
+            return Ok(usersDto);
+        }
 
         [HttpPost]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
         [ProducesResponseType(500)]
@@ -61,25 +104,93 @@ namespace YPlanning.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var existingTest = _testRepository.GetTests()
-                .Where(t => t.ClassId == testCreate.ClassId && t.UserId == testCreate.UserId)
-                .FirstOrDefault();
-
-            if (existingTest != null)
+            if (_testService.DoesTestExistByClassAndUserId(testCreate.ClassId, testCreate.UserId))
             {
                 ModelState.AddModelError("", "Test already exists");
                 return Conflict(ModelState);
             }
 
             var testMap = _mapper.Map<Test>(testCreate);
-
-            if (!_testRepository.CreateTest(testMap))
+            if (!_testService.CreateTest(testMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);
             }
 
-            return Ok("Test succesfully created");
+            return Ok("Test successfully created");
+        }
+
+        [HttpPut("{testId:int}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
+        public IActionResult UpdateTest(int? testId, [FromBody] TestDto updatedtest)
+        {
+            if (testId == null)
+                return BadRequest("Test ID cannot be null");
+
+            if (updatedtest == null)
+                return BadRequest("Test cannot be null");
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (!_testService.DoesTestExistById(testId))
+                return NotFound();
+            
+            var testMap = _mapper.Map<Test>(updatedtest);
+            testMap.Id = testId ?? -1;
+            
+            if (!_testService.UpdateTest(testMap))
+            {
+                ModelState.AddModelError("", "Something went wrong while saving");
+                return StatusCode(500, ModelState);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{testId:int}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteTestById(int? testId)
+        {
+            if (testId == null)
+                return BadRequest("Test ID cannot be null");
+
+            if (!_testService.DoesTestExistById(testId))
+                return NotFound();
+
+            if (!_testService.DeleteTestById(testId))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting the test");
+                return StatusCode(500, ModelState);
+            }
+            
+            return NoContent();
+        }
+
+        [HttpDelete("{classId:int}/{userId:int}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteTestByClassAndUserId(int? classId, int? userId)
+        {
+            if (classId == null || userId == null)
+                return BadRequest("Class / User ID cannot be null");
+
+            if (!_testService.DoesTestExistByClassAndUserId(classId, userId))
+                return NotFound();
+            
+            if (!_testService.DeleteTestByClassAndUserId(classId, userId))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting the test");
+                return StatusCode(500, ModelState);
+            }
+            
+            return NoContent();
         }
     }
 }

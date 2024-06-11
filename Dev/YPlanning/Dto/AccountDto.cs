@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using YPlanning.Models;
 
 namespace YPlanning.Dto
 {
     public class AccountDto
     {
         [Column("id")]
+        [Key]
         public int Id { get; set; }
 
         [Column("login")]

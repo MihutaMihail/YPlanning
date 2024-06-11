@@ -6,6 +6,7 @@ namespace YPlanning.Dto
     public class ClassDto
     {
         [Column("id")]
+        [Key]
         public int Id { get; set; }
 
         [Column("subject")]

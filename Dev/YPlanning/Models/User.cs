@@ -6,6 +6,7 @@ namespace YPlanning.Models
     public class User
     {
         [Column("id")]
+        [Key]
         public int Id { get; set; }
 
         [Column("lastname")]
