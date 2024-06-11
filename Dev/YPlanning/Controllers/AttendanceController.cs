@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using YPlanning.Interfaces;
-using YPlanning.Dto;
 using YPlanning.Models;
-using YPlanning.Repository;
+using YPlanning.Interfaces.Services;
+using YPlanning.Dto;
 
 namespace YPlanning.Controllers
 {
@@ -11,12 +10,12 @@ namespace YPlanning.Controllers
     [ApiController]
     public class AttendanceController : Controller
     {
-        private readonly IAttendanceRepository _attendanceRepository;
+        private readonly IAttendanceService _attendanceService;
         private readonly IMapper _mapper;
 
-        public AttendanceController(IAttendanceRepository attendanceRepository, IMapper mapper)
+        public AttendanceController(IAttendanceService attendanceService, IMapper mapper)
         {
-            _attendanceRepository = attendanceRepository;
+            _attendanceService = attendanceService;
             _mapper = mapper;
         }
 
@@ -24,40 +23,72 @@ namespace YPlanning.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<AttendanceDto>))]
         public IActionResult GetAttendances() 
         {
-            var attendancesDto = _mapper.Map<List<AttendanceDto>>(_attendanceRepository.GetAttendances());
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
+            var attendances = _attendanceService.GetAttendances();
+            var attendancesDto = _mapper.Map<List<AttendanceDto>>(attendances);
+            
             return Ok(attendancesDto);
         }
 
-        [HttpGet("{userId}/classes")]
+        [HttpGet("{attendanceId:int}")]
+        [ProducesResponseType(200, Type = typeof(AttendanceDto))]
+        public IActionResult GetAttendanceById(int? attendanceId)
+        {
+            if (attendanceId == null)
+                return BadRequest("Attendance ID cannot be null");
+
+            if (!_attendanceService.DoesAttendanceExistById(attendanceId))
+                return NotFound();
+
+            var attendance = _attendanceService.GetAttendanceById(attendanceId);
+            var attendanceDto = _mapper.Map<AttendanceDto>(attendance);
+
+            return Ok(attendanceDto);
+        }
+
+        [HttpGet("{classId:int}/{userId:int}")]
+        [ProducesResponseType(200, Type = typeof(AttendanceDto))]
+        public IActionResult GetAttendanceByClassAndUserId(int? classId, int? userId)
+        {
+            if (classId == null || userId == null)
+                return BadRequest("Class / User ID cannot be null");
+            
+            if (!_attendanceService.DoesAttendanceExistByClassAndUserId(classId, userId))
+                return NotFound();
+
+            var attendance = _attendanceService.GetAttendanceByClassAndUserId(classId, userId);
+            var attendanceDto = _mapper.Map<AttendanceDto>(attendance);
+
+            return Ok(attendanceDto);
+        }
+        
+        [HttpGet("{userId:int}/classes")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ClassDto>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult GetClassesByUserId(int userId)
+        public IActionResult GetClassesByUserId(int? userId)
         {
-            var classes = _mapper.Map<List<ClassDto>>(_attendanceRepository.GetClassesByUserId(userId));
+            if (userId == null)
+                return BadRequest("User ID cannot be null");
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            return Ok(classes);
+            var classes = _attendanceService.GetClassesByUserId(userId);
+            var classesDto = _mapper.Map<List<ClassDto>>(classes);
+           
+            return Ok(classesDto);
         }
 
-        [HttpGet("{classId}/users")]
+        [HttpGet("{classId:int}/users")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<UserDto>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult GetUsersByClassId(int classId)
+        public IActionResult GetUsersByClassId(int? classId)
         {
-            var users = _mapper.Map<List<UserDto>>(_attendanceRepository.GetUsersByClassId(classId));
+            if (classId == null)
+                return BadRequest("Class ID cannot be null");
+            
+            var users = _attendanceService.GetUsersByClassId(classId);
+            var usersDto = _mapper.Map<List<UserDto>>(users);
 
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            return Ok(users);
+            return Ok(usersDto);
         }
 
         [HttpPost]
@@ -73,19 +104,14 @@ namespace YPlanning.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var existingAttendance = _attendanceRepository.GetAttendances()
-                .Where(at => at.ClassId == attendanceCreate.ClassId && at.UserId == attendanceCreate.UserId)
-                .FirstOrDefault();
-
-            if (existingAttendance != null)
+            if (_attendanceService.DoesAttendanceExistByClassAndUserId(attendanceCreate.ClassId, attendanceCreate.UserId))
             {
                 ModelState.AddModelError("", "Attendance already exists");
                 return Conflict(ModelState);
             }
 
             var attendanceMap = _mapper.Map<Attendance>(attendanceCreate);
-
-            if (!_attendanceRepository.CreateAttendance(attendanceMap))
+            if (!_attendanceService.CreateAttendance(attendanceMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);
@@ -94,38 +120,76 @@ namespace YPlanning.Controllers
             return Ok("Attendance successfully created");
         }
 
-        [HttpPut("{classId}/{userId}")]
+        [HttpPut("{attendanceId:int}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult UpdateAttendance(int classId, int userId, [FromBody] AttendanceDto updatedAttendance)
+        public IActionResult UpdateAttendance(int? attendanceId, [FromBody] AttendanceDto updatedAttendance)
         {
+            if (attendanceId == null)
+                return BadRequest("Attendance ID cannot be null");
+
             if (updatedAttendance == null)
                 return BadRequest("Attendance cannot be null");
-
-            if (updatedAttendance.ClassId != 0 && classId != updatedAttendance.ClassId)
-                return BadRequest("Class ids are not matching");
-            if (updatedAttendance.UserId != 0 && userId != updatedAttendance.UserId)
-                return BadRequest("User ids are not matching");
-
-            if (!_attendanceRepository.AttendanceExists(classId, userId))
-                return NotFound();
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            updatedAttendance.ClassId = classId;
-            updatedAttendance.UserId = userId;
-
+            if (!_attendanceService.DoesAttendanceExistById(attendanceId))
+                return NotFound();
+            
             var attendanceMap = _mapper.Map<Attendance>(updatedAttendance);
+            attendanceMap.Id = attendanceId ?? -1;
 
-            if (!_attendanceRepository.UpdateAttendance(attendanceMap))
+            if (!_attendanceService.UpdateAttendance(attendanceMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);
             }
 
+            return NoContent();
+        }
+
+        [HttpDelete("{attendanceId:int}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteAttendanceById(int? attendanceId)
+        {
+            if (attendanceId == null)
+                return BadRequest("Attendance ID cannot be null");
+
+            if (!_attendanceService.DoesAttendanceExistById(attendanceId))
+                return NotFound();
+
+            if (!_attendanceService.DeleteAttendanceById(attendanceId))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting the attendance");
+                return StatusCode(500, ModelState);
+            }
+            
+            return NoContent();
+        }
+
+        [HttpDelete("{classId:int}/{userId:int}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteAttendanceByClassAndUserId(int? classId, int? userId)
+        {
+            if (classId == null || userId == null)
+                return BadRequest("Class / User ID cannot be null");
+
+            if (!_attendanceService.DoesAttendanceExistByClassAndUserId(classId, userId))
+                return NotFound();
+            
+            if (!_attendanceService.DeleteAttendanceByClassAndUserId(classId, userId))
+            {
+                ModelState.AddModelError("", "Something went wrong deleting the attendance");
+                return StatusCode(500, ModelState);
+            }
+            
             return NoContent();
         }
     }

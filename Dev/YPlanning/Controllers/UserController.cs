@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using YPlanning.Interfaces;
-using YPlanning.Dto;
 using YPlanning.Models;
+using YPlanning.Interfaces.Services;
+using YPlanning.Dto;
 
 namespace YPlanning.Controllers
 {
@@ -10,14 +10,12 @@ namespace YPlanning.Controllers
     [ApiController]
     public class UserController : Controller
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IAccountRepository _accountRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository, IAccountRepository accountRepository, IMapper mapper)
+        public UserController(IUserService userService, IMapper mapper)
         {
-            _userRepository = userRepository;
-            _accountRepository = accountRepository;
+            _userService = userService;
             _mapper = mapper;
         }
         
@@ -25,31 +23,48 @@ namespace YPlanning.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<UserDto>))]
         public IActionResult GetUsers() 
         {
-            var usersDto = _mapper.Map<List<UserDto>>(_userRepository.GetUsers());
-
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var users = _userService.GetUsers();
+            var usersDto = _mapper.Map<List<UserDto>>(users);
             
             return Ok(usersDto);
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("{userId:int}")]
         [ProducesResponseType(200, Type = typeof(UserDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult GetUser(int userId)
+        public IActionResult GetUserById(int? userId)
         {
-            if (!_userRepository.UserExists(userId))
+            if (userId == null)
+                return BadRequest("User ID cannot be null");
+
+            if (!_userService.DoesUserExistById(userId))
                 return NotFound();
 
-            var userDto = _mapper.Map<UserDto>(_userRepository.GetUserById(userId));
-            
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var user = _userService.GetUserById(userId);
+            var userDto = _mapper.Map<UserDto>(user);
 
             return Ok(userDto);
         }
 
+        [HttpGet("{lastName}/{firstName}")]
+        [ProducesResponseType(200, Type = typeof(UserDto))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult GetUserByName(string? lastName, string? firstName)
+        {
+            if (string.IsNullOrWhiteSpace(lastName) || string.IsNullOrWhiteSpace(firstName))
+                return BadRequest("Last name / First name cannot be null or empty");
+
+            if (!_userService.DoesUserExistByName(lastName, firstName))
+                return NotFound();
+
+            var user = _userService.GetUserByName(lastName, firstName);
+            var userDto = _mapper.Map<UserDto>(user);
+
+            return Ok(userDto);
+        }
+        
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -63,20 +78,16 @@ namespace YPlanning.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var existingUser = _userRepository.GetUsers()
-                .Where(u => u.Email?.Trim().ToUpper() == userCreate.Email?.Trim().ToUpper())
-                .FirstOrDefault();
-
-            if (existingUser != null)
+            if (_userService.DoesUserDtoExists(userCreate))
             {
                 ModelState.AddModelError("", "User already exists");
                 return Conflict(ModelState);
             }
 
             userCreate.BirthDate = userCreate.BirthDate?.ToUniversalTime();
+            
             var userMap = _mapper.Map<User>(userCreate);
-
-            if (!_userRepository.CreateUser(userMap))
+            if (!_userService.CreateUser(userMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);
@@ -85,31 +96,31 @@ namespace YPlanning.Controllers
             return Ok("User successfully created");
         }
 
-        [HttpPut("{userId}")]
+        [HttpPut("{userId:int}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [ProducesResponseType(500)]
-        public IActionResult UpdateUser(int userId, [FromBody] UserDto updatedUser)
+        public IActionResult UpdateUser(int? userId, [FromBody] UserDto updatedUser)
         {
+            if (userId == null)
+                return BadRequest("User ID cannot be null");
+
             if (updatedUser == null)
                 return BadRequest("User cannot be null");
-
-            if (updatedUser.Id != 0 && userId != updatedUser.Id)
-                return BadRequest("Ids are not matching");
-            
-            if (!_userRepository.UserExists(userId))
-                return NotFound();
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            updatedUser.Id = userId;
+            if (!_userService.DoesUserExistById(userId))
+                return NotFound();
+            
             updatedUser.BirthDate = updatedUser.BirthDate?.ToUniversalTime();
 
             var userMap = _mapper.Map<User>(updatedUser);
+            userMap.Id = userId ?? -1;
 
-            if (!_userRepository.UpdateUser(userMap))
+            if (!_userService.UpdateUser(userMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
                 return StatusCode(500, ModelState);
@@ -118,30 +129,42 @@ namespace YPlanning.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{userId}")]
+        [HttpDelete("{userId:int}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult DeleteUser(int userId)
+        public IActionResult DeleteUserById(int? userId)
         {
-            if (!_userRepository.UserExists(userId))
+            if (userId == null)
+                return BadRequest("User ID cannot be null");
+
+            if (!_userService.DoesUserExistById(userId))
                 return NotFound();
 
-            var accountToDelete = _accountRepository.GetAccountByUserId(userId);
-            var userToDelete = _userRepository.GetUserById(userId);
-            
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            if (!_accountRepository.DeleteAccount(accountToDelete))
+            if (!_userService.DeleteUserById(userId))
             {
-                ModelState.AddModelError("", "Something went wrong deleting account");
+                ModelState.AddModelError("", "Something went wrong deleting the user");
                 return StatusCode(500, ModelState);
             }
+            
+            return NoContent();
+        }
 
-            if (!_userRepository.DeleteUser(userToDelete))
+        [HttpDelete("{lastName}/{firstName}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        public IActionResult DeleteUserByName(string? lastName, string? firstName)
+        {
+            if (string.IsNullOrWhiteSpace(lastName) || string.IsNullOrWhiteSpace(firstName))
+                return BadRequest("Last name / First name cannot be null or empty");
+
+            if (!_userService.DoesUserExistByName(lastName, firstName))
+                return NotFound();
+            
+            if (!_userService.DeleteUserByName(lastName, firstName))
             {
-                ModelState.AddModelError("", "Something went wrong deleting user");
+                ModelState.AddModelError("", "Something went wrong deleting the user");
                 return StatusCode(500, ModelState);
             }
 

@@ -5,6 +5,10 @@ namespace YPlanning.Models
 {
     public class Attendance
     {
+        [Column("id")]
+        [Key]
+        public int Id { get; set; }
+
         [Column("classid")]
         [Required(ErrorMessage = "Class id is required")]
         public int? ClassId { get; set; }

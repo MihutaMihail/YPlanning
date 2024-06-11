@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using YPlanning.Data;
-using YPlanning.Interfaces;
+using YPlanning.Interfaces.Repository;
 using YPlanning.Models;
 
 namespace YPlanning.Repository
@@ -14,6 +14,50 @@ namespace YPlanning.Repository
             _context = context;
         }
 
+        public bool CreateAttendance(Attendance createAttendance)
+        {
+            _context.Add(createAttendance);
+            return Save();
+        }
+
+        public bool DeleteAttendance(Attendance deleteAttendance)
+        {
+            _context.Remove(deleteAttendance);
+            return Save();
+        }
+
+        public bool DeleteAttendances(List<Attendance> deleteAttendances)
+        {
+            _context.RemoveRange(deleteAttendances);
+            return Save();
+        }
+
+        public bool DoesAttendanceExistByClassAndUserId(int? classId, int? userId)
+        {
+            return _context.Attendances?
+               .Any(at => at.ClassId == classId && at.UserId == userId) ?? false;
+        }
+
+        public bool DoesAttendanceExistById(int? id)
+        {
+            return _context.Attendances?
+                .Any(at => at.Id == id) ?? false;
+        }
+
+        public Attendance GetAttendanceByClassAndUserId(int? classId, int? userId)
+        {
+            return _context.Attendances?
+                 .Where(at => at.ClassId == classId && at.UserId == userId)
+                 .FirstOrDefault() ?? new Attendance();
+        }
+        
+        public Attendance GetAttendanceById(int? id)
+        {
+            return _context.Attendances?
+                .Where(at => at.Id == id)
+                .FirstOrDefault() ?? new Attendance();
+        }
+
         public ICollection<Attendance> GetAttendances()
         {
             return _context.Attendances?
@@ -23,7 +67,21 @@ namespace YPlanning.Repository
                 .ToList() ?? new List<Attendance>();
         }
 
-        public ICollection<Class> GetClassesByUserId(int userId)
+        public ICollection<Attendance> GetAttendancesByClassId(int? classId)
+        {
+            return _context.Attendances?
+                .Where(at => at.ClassId == classId)
+                .ToList() ?? new List<Attendance>();
+        }
+
+        public ICollection<Attendance> GetAttendancesByUserId(int? userId)
+        {
+            return _context.Attendances?
+                .Where(at => at.UserId == userId)
+                .ToList() ?? new List<Attendance>();
+        }
+
+        public ICollection<Class> GetClassesByUserId(int? userId)
         {
             return _context.Attendances?
                 .Where(at => at.UserId == userId)
@@ -31,7 +89,7 @@ namespace YPlanning.Repository
                 .ToList() ?? new List<Class>();
         }
 
-        public ICollection<User> GetUsersByClassId(int classId)
+        public ICollection<User> GetUsersByClassId(int? classId)
         {
             return _context.Attendances?
                 .Where(at => at.ClassId == classId)
@@ -39,33 +97,16 @@ namespace YPlanning.Repository
                 .ToList() ?? new List<User>();
         }
 
-        public bool AttendanceExists(int classId, int userId)
+        public bool Save()
         {
-            return _context.Attendances?.Any(uc => uc.UserId == userId && uc.ClassId == classId) ?? false;
-
-        }
-
-        public bool CreateAttendance(Attendance createAttendance)
-        {
-            _context.Add(createAttendance);
-            return Save();
+            var saved = _context.SaveChanges();
+            return saved > 0 ? true : false;
         }
 
         public bool UpdateAttendance(Attendance updatedAttendance)
         {
             _context.Update(updatedAttendance);
             return Save();
-        }
-
-        public bool DeleteAttendance(Attendance deleteAttendance) {
-            _context.Remove(deleteAttendance);
-            return Save();
-        }
-
-        public bool Save()
-        {
-            var saved = _context.SaveChanges();
-            return saved > 0 ? true : false;
         }
     }
 }

@@ -14,6 +14,9 @@
 - [**05/06/2024**](#05062024)
 - [**06/06/2024**](#06062024)
 - [**07/06/2024**](#07062024)
+- [**08/06/2024**](#08062024)
+- [**09/06/2024**](#09062024)
+- [**10-11/06/2024**](#10-11062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -107,3 +110,15 @@ Il fonctionner sur IIS Express mais comme j'ai changer assez vite sur Docker, il
 PUT endpoint ont été faite pour tous les entités.
 
 J'ai commencé à faire tous les DELETE et j'ai avancé un peu mais j'ai pas encore finir a faire en sorte qu'une fois qu'on supprime un utilisateur, il faut aussi supprimer son compte, ses présences, etc. Par contre, l'action de juste supprimer fonctionne.
+
+## 08/06/2024
+Les méthodes DELETE ont été terminé.
+
+## 09/06/2024
+J'ai décidé de changer comment je gère les DELETE ainsi que d'autre choses en rapport avec ceci. Je doit vraiment séparer les tâches des controleurs et répertoires et peut-être c'est pas la meuilleure idée de mettre 3-4 répertoires dans le controlleur pour faire un delete user vu que je doit effacer plusieurs données qui font référénce à ce user avant de le supprimer sinon on peut pas. Pour faire ceci, je vais créer des SERVICES. Ce sont les services qui vont gèrer ces choses là. Comme ça, le controleur va faire ce qu'il doit faire comme correctement envoyer la réponse, appeler la correcte méthode, mais je ne vais pas mettre ceci dans les répertoires non plus, vu que je veux pas mélanger des users et accounts dans le même répertoire. Le controleur a juste a appeller la méthode DeleteUser() depuis le service, et le service va effacer ce qu'il doit effacer en utilisant les fonctions depuis les répertoire user, account, etc.
+
+J'ai aussi réléchit comment je pourrais faire pour intégrer un token en tant que vérifications. Comme ça, un user simple comme un étudiant pourras pas créer des utilisateurs, les modifier, etc.
+
+## 10-11/06/2024
+Fini tous les changement nécessaires pour intégrer les services.
+Plusieurs endpoints on été ajouté.
