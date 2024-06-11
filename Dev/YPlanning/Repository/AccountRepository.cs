@@ -51,6 +51,14 @@ namespace YPlanning.Repository
                 .FirstOrDefault() ?? new Account();
         }
 
+        public DateTime GetAccountCreationDateById(int? id)
+        {
+            return _context.Accounts?
+                .Where(ac => ac.Id == id)
+                .Select(ac => ac.AccountCreationDate)
+                .FirstOrDefault() ?? new DateTime();
+        }
+
         public ICollection<Account> GetAccounts()
         {
             return _context.Accounts?

@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using YPlanning.Data;
 using YPlanning.Interfaces.Repository;
 using YPlanning.Interfaces.Services;
+using YPlanning.Models;
 using YPlanning.Repository;
 using YPlanning.Services;
 
@@ -57,6 +59,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 // Add services
 builder.Services.AddControllers();
+builder.Services.AddScoped<IPasswordHasher<Account>, PasswordHasher<Account>>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

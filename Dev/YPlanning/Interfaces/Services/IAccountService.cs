@@ -7,6 +7,7 @@ namespace YPlanning.Interfaces.Services
         ICollection<Account> GetAccounts();
         Account GetAccountById(int? id);
         Account GetAccountByUserId(int? userId);
+        DateTime GetAccountCreationDateById(int? id);
         bool CreateAccount(Account createAccount);
         bool UpdateAccount(Account updatedAccount);
         bool DeleteAccountById(int? id);

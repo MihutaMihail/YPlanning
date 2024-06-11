@@ -53,6 +53,11 @@ namespace YPlanning.Services
             return _accountRepository.GetAccountByUserId(userId);
         }
 
+        public DateTime GetAccountCreationDateById(int? id)
+        {
+            return _accountRepository.GetAccountCreationDateById(id);
+        }
+
         public ICollection<Account> GetAccounts()
         {
             return _accountRepository.GetAccounts();

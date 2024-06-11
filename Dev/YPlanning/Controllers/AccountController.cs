@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using YPlanning.Models;
 using YPlanning.Interfaces.Services;
 using YPlanning.Dto;
+using Microsoft.AspNetCore.Identity;
 
 namespace YPlanning.Controllers
 {
@@ -12,11 +13,14 @@ namespace YPlanning.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IMapper _mapper;
+        private readonly IPasswordHasher<Account> _passwordHasher;
 
-        public AccountController(IAccountService accountService, IMapper mapper)
+        public AccountController(IAccountService accountService, 
+            IMapper mapper, IPasswordHasher<Account> passwordHasher)
         {
             _accountService = accountService;
             _mapper = mapper;
+            _passwordHasher = passwordHasher;
         }
 
         [HttpGet]
@@ -85,6 +89,9 @@ namespace YPlanning.Controllers
             }
             
             var accountMap = _mapper.Map<Account>(accountCreate);
+            accountMap.Password = _passwordHasher.HashPassword(accountMap, accountCreate.Password);
+            accountMap.AccountCreationDate = DateTime.UtcNow;
+
             if (!_accountService.CreateAccount(accountMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
@@ -112,9 +119,11 @@ namespace YPlanning.Controllers
             
             if (!_accountService.DoesAccountExistsById(accountId))
                 return NotFound();
-            
+
             var accountMap = _mapper.Map<Account>(updatedAccount);
             accountMap.Id = accountId ?? -1;
+            accountMap.Password = _passwordHasher.HashPassword(accountMap, updatedAccount.Password);
+            accountMap.AccountCreationDate = _accountService.GetAccountCreationDateById(accountId);
 
             if (!_accountService.UpdateAccount(accountMap))
             {
