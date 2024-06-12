@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YPlanning", "YPlanning.csproj", "{091F63A4-3995-490F-B539-339389EB0B9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YPlanning", "YPlanning.csproj", "{091F63A4-3995-490F-B539-339389EB0B9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
