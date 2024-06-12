@@ -25,7 +25,7 @@ function Handle-Certificate {
 
 # Generate a new SSL certificate
 function New-Certificate {
-    Write-Host "New certificate password..."
+    Write-Host "--- New certificate password..."
     $certPasswordPlainText = Read-Password -PlainTextOutput
     
     # Generate a self-signed certificate and export as localhost.pfx (Personal Information Exchange)
@@ -37,7 +37,7 @@ function New-Certificate {
 
 # If certificate already exists, copy it
 function Copy-ExistingCertificate {
-    Write-Host "Existant certificate password..."
+    Write-Host "--- Existant certificate password..."
     $certPassword = Read-Password
 
     # Export existing certificate
@@ -109,7 +109,7 @@ function Run-PostgreSQL {
     # Stop and remove running containers
     Remove-Containers -containerName $containerName
 
-    Write-Host "Database password..."
+    Write-Host "--- Database password..."
     $dbPasswordPlainText = Read-Password -PlainTextOutput
 
     # Run container
@@ -118,7 +118,7 @@ function Run-PostgreSQL {
 }
 
 function Execute-PostgreSQL {
-    Write-Host "Waiting for 15 seconds for the server to start..."
+    Write-Host "--- Waiting for 15 seconds for the server to start..."
     Start-Sleep -s 15
 
     Write-Host "Executing SQL scripts phase..."
@@ -189,10 +189,10 @@ function Run-API {
     $containerName = "yplanning"
     $portMapping = "443:443"
 
-    Write-Host "Certificate password..."
+    Write-Host "--- Certificate password..."
     $certPasswordPlainText = Read-Password -PlainTextOutput
 
-    Write-Host "Database password..."
+    Write-Host "--- Database password..."
     $pgPasswordPlainText = Read-Password -PlainTextOutput
 
     Write-Host "Getting PostgreSQL server ip address..."
@@ -201,6 +201,36 @@ function Run-API {
     # Run container
     Write-Host "Running API container..."
     Invoke-Expression "docker run --name $containerName -p $portMapping -e 'CERT_PASSWORD=$certPasswordPlainText' -e 'POSTGRES_PASSWORD=$pgPasswordPlainText' -e 'POSTGRESS_IP_ADDRESS=$pgIpAddress' -d $containerName"
+}
+
+# /*-----------------------------------
+### GENERATE TOKEN
+# \*-----------------------------------
+
+function Handle-GenerateToken {
+    $token = Generate-SimpleToken
+    $hashedToken = Hash-Token -token $token
+
+    Write-Host "--- Token (for API) : $token"
+    Write-Host "--- Hashed token (for database) : $hashedToken"
+}
+
+function Generate-SimpleToken {
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    $token = -join ((1..30) | ForEach-Object { $chars[(Get-Random -Maximum $chars.Length)] })
+    return $token
+}
+
+function Hash-Token {
+    param (
+        [string]$token
+    )
+
+    $sha256 = [System.Security.Cryptography.SHA256]::Create()
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($token)
+    $hashBytes = $sha256.ComputeHash($bytes)
+    $hashString = [BitConverter]::ToString($hashBytes) -replace '-', ''
+    return $hashString
 }
 
 # /*-----------------------------------
@@ -252,6 +282,7 @@ function Show-Menu {
     Write-Host "2. Certificate"
     Write-Host "3. PostgreSQL"
     Write-Host "4. API"
+    Write-Host "5. Generate Token"
     Write-Host "Q. Quit"
     Write-Host "============="
 }
@@ -276,6 +307,10 @@ do {
         }
         '4' {
             Handle-API
+            Pause
+        }
+        '5' {
+            Handle-GenerateToken
             Pause
         }
         'Q' {

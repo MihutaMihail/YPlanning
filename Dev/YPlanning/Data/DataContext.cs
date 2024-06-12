@@ -25,19 +25,23 @@ namespace YPlanning.Data
             modelBuilder.Entity<Attendance>().ToTable("attendances");
             modelBuilder.Entity<Test>().ToTable("tests");
 
-            // One-to-one relationship between User and Account
+            // One-to-one relationship between USER and ACCOUNT
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Account)
                 .WithOne(ac => ac.User)
                 .HasForeignKey<Account>(ac => ac.UserId);
             
-            // One-to-many relationship between User and Tests
+            // One-to-to relationship between USER and TOKEN
+            /*modelBuilder.Entity<User>()
+                .HasOne(u => u.)*/
+
+            // One-to-many relationship between USERS and TESTS
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Tests)
                 .WithOne(t => t.User)
                 .HasForeignKey(t => t.UserId);
 
-            // Define primary key for Attendance
+            // Define primary key for ATTENDANCE
             modelBuilder.Entity<Attendance>()
                 .HasKey(at => at.Id);
 
@@ -51,7 +55,7 @@ namespace YPlanning.Data
                 .WithMany(c => c.Attendances)
                 .HasForeignKey(c => c.ClassId);
 
-            // Define primary key for Test
+            // Define primary key for TEST
             modelBuilder.Entity<Test>()
                 .HasKey(t => t.Id);
 
