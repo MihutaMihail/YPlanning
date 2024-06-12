@@ -408,3 +408,4 @@ conception/LoopingImage.jpg
 # machines virtuelles
 *.vm*
 infra/serveurmail/*
+infra/serveurweb/*
