@@ -1,4 +1,6 @@
 $APP_SETUP_PATH = "./Dev/YPlanning/AppSetup"
+$KEY = [System.Text.Encoding]::UTF8.GetBytes("your-32-char-secret-key") # Use a 32-char key for AES-256
+$IV = [System.Text.Encoding]::UTF8.GetBytes("your-16-char-iv") # Use a 16-char IV
 
 # /*-----------------------------------
 ### CERTIFICATE
@@ -25,7 +27,7 @@ function Handle-Certificate {
 
 # Generate a new SSL certificate
 function New-Certificate {
-    Write-Host "New certificate password..."
+    Write-Host "--- New certificate password..."
     $certPasswordPlainText = Read-Password -PlainTextOutput
     
     # Generate a self-signed certificate and export as localhost.pfx (Personal Information Exchange)
@@ -37,7 +39,7 @@ function New-Certificate {
 
 # If certificate already exists, copy it
 function Copy-ExistingCertificate {
-    Write-Host "Existant certificate password..."
+    Write-Host "--- Existant certificate password..."
     $certPassword = Read-Password
 
     # Export existing certificate
@@ -109,7 +111,7 @@ function Run-PostgreSQL {
     # Stop and remove running containers
     Remove-Containers -containerName $containerName
 
-    Write-Host "Database password..."
+    Write-Host "--- Database password..."
     $dbPasswordPlainText = Read-Password -PlainTextOutput
 
     # Run container
@@ -118,7 +120,7 @@ function Run-PostgreSQL {
 }
 
 function Execute-PostgreSQL {
-    Write-Host "Waiting for 15 seconds for the server to start..."
+    Write-Host "--- Waiting for 15 seconds for the server to start..."
     Start-Sleep -s 15
 
     Write-Host "Executing SQL scripts phase..."
@@ -189,10 +191,10 @@ function Run-API {
     $containerName = "yplanning"
     $portMapping = "443:443"
 
-    Write-Host "Certificate password..."
+    Write-Host "--- Certificate password..."
     $certPasswordPlainText = Read-Password -PlainTextOutput
 
-    Write-Host "Database password..."
+    Write-Host "--- Database password..."
     $pgPasswordPlainText = Read-Password -PlainTextOutput
 
     Write-Host "Getting PostgreSQL server ip address..."
@@ -200,12 +202,61 @@ function Run-API {
 
     # Run container
     Write-Host "Running API container..."
-    Invoke-Expression "docker run --name $containerName -p $portMapping -e 'CERT_PASSWORD=$certPasswordPlainText' -e 'POSTGRES_PASSWORD=$pgPasswordPlainText' -e 'POSTGRESS_IP_ADDRESS=$pgIpAddress' -d $containerName"
+    Invoke-Expression "docker run --name $containerName -p $portMapping -e 'CERT_PASSWORD=$certPasswordPlainText' -e 'POSTGRES_PASSWORD=$pgPasswordPlainText' -e 'POSTGRESS_IP_ADDRESS=$pgIpAddress' -e 'AES_KEY=$KEY_Base64' -e 'AES_IV=$IV_Base64' -d $containerName"
+}
+
+# /*-----------------------------------
+### TOKEN
+# \*-----------------------------------
+
+function Handle-Token {
+    $token = Generate-RandomString -length $tokenLength
+    $encryptedToken = Encrypt-Token -token $token -KEY $KEY_string -IV $IV_string
+
+    Write-Host "--- Token (for API) : $token"
+    Write-Host "--- Encrypted token (for database) : $encryptedToken"
+}
+
+function Encrypt-Token {
+    param (
+        [string]$token,
+        [string]$KEY,
+        [string]$IV
+    )
+
+    $aes = [System.Security.Cryptography.Aes]::Create()
+    $aes.Key = [System.Text.Encoding]::UTF8.GetBytes($KEY)
+    $aes.IV = [System.Text.Encoding]::UTF8.GetBytes($IV)
+
+    $encryptor = $aes.CreateEncryptor($aes.Key, $aes.IV)
+    $tokenBytes = [System.Text.Encoding]::UTF8.GetBytes($token)
+
+    $ms = New-Object System.IO.MemoryStream
+    $cs = New-Object System.Security.Cryptography.CryptoStream($ms, $encryptor, [System.Security.Cryptography.CryptoStreamMode]::Write)
+    $cs.Write($tokenBytes, 0, $tokenBytes.Length)
+    $cs.FlushFinalBlock()
+
+    $encryptedTokenBytes = $ms.ToArray()
+    $cs.Close()
+    $ms.Close()
+
+    $encryptedToken = [Convert]::ToBase64String($encryptedTokenBytes)
+    return $encryptedToken
 }
 
 # /*-----------------------------------
 ### HELPER
 # \*-----------------------------------
+
+function Generate-RandomString {
+    param (
+        [int]$length
+    )
+
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    $token = -join ((1..$length) | ForEach-Object { $chars[(Get-Random -Maximum $chars.Length)] })
+    return $token
+}
 
 function Read-Password {
     param (
@@ -242,17 +293,28 @@ function Remove-Containers {
 ### --- ENTRY POINT ---
 # \*-----------------------------------
 
+$tokenLength = 30
+$keyLength = 32
+$ivLength = 16
+
+$KEY_string = Generate-RandomString -length $keyLength
+$IV_string = Generate-RandomString -length $ivLength
+
+$KEY_Base64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($KEY_string))
+$IV_Base64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($IV_string))
+
 function Show-Menu {
     Clear-Host
     Write-Host "=== Setup Menu ==="
-    Write-Host "1. FULL SETUP (RECOMMENDED FOR FIRST USE)"
+    Write-Host "1. FULL SETUP (RECOMMENDED)"
+    Write-Host "Q. Quit"
     Write-Host ""
     Write-Host "WARNING : CHOOSING ANYTHING ON THIS LIST COULD RESULT IN DATA LOSS"
     Write-Host "Please note that it could also simply fail to work if the FULL SETUP option has not been completed"
     Write-Host "2. Certificate"
     Write-Host "3. PostgreSQL"
     Write-Host "4. API"
-    Write-Host "Q. Quit"
+    Write-Host "5. Generate Token"
     Write-Host "============="
 }
 
@@ -276,6 +338,10 @@ do {
         }
         '4' {
             Handle-API
+            Pause
+        }
+        '5' {
+            Handle-Token
             Pause
         }
         'Q' {

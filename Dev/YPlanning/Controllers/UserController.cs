@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using YPlanning.Models;
 using YPlanning.Interfaces.Services;
 using YPlanning.Dto;
+using YPlanning.Authorize;
 
 namespace YPlanning.Controllers
 {
@@ -20,6 +21,7 @@ namespace YPlanning.Controllers
         }
         
         [HttpGet]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<UserDto>))]
         public IActionResult GetUsers() 
         {
@@ -30,6 +32,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("{userId:int}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(UserDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -48,6 +51,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("{lastName}/{firstName}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(UserDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -66,6 +70,7 @@ namespace YPlanning.Controllers
         }
         
         [HttpPost]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
@@ -97,6 +102,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPut("{userId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -130,6 +136,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("{userId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -151,6 +158,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("{lastName}/{firstName}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

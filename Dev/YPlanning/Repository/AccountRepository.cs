@@ -1,4 +1,5 @@
-﻿using YPlanning.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using YPlanning.Data;
 using YPlanning.Interfaces.Repository;
 using YPlanning.Models;
 
@@ -7,10 +8,26 @@ namespace YPlanning.Repository
     public class AccountRepository : IAccountRepository
     {
         private readonly DataContext _context;
+        private readonly IPasswordHasher<Account> _passwordHasher;
 
-        public AccountRepository(DataContext context)
+
+        public AccountRepository(DataContext context, IPasswordHasher<Account> passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
+        }
+
+        public bool Authenticate(string? login, string? password)
+        {
+            var account = _context.Accounts?
+                .Where(ac => ac.Login == login)
+                .FirstOrDefault() ?? null;
+
+            if (account == null)
+                return false;
+
+            var verificationResult = _passwordHasher.VerifyHashedPassword(account, account.Password, password);
+            return verificationResult == PasswordVerificationResult.Success;
         }
 
         public bool CreateAccount(Account createAccount)
@@ -31,6 +48,12 @@ namespace YPlanning.Repository
                 .Any(ac => ac.Id == id) ?? false;
         }
 
+        public bool DoesAccountExistsByLogin(string? login)
+        {
+            return _context.Accounts?
+                .Any(ac => ac.Login == login) ?? false;
+        }
+
         public bool DoesAccountExistsByUserId(int? userId)
         {
             return _context.Accounts?
@@ -43,12 +66,27 @@ namespace YPlanning.Repository
                 .Where(ac => ac.Id == id)
                 .FirstOrDefault() ?? new Account();
         }
-        
+
+        public Account GetAccountByLogin(string? login)
+        {
+            return _context.Accounts?
+                .Where(ac => ac.Login == login)
+                .FirstOrDefault() ?? new Account();
+        }
+
         public Account GetAccountByUserId(int? userId)
         {
             return _context.Accounts?
                 .Where(ac => ac.UserId == userId)
                 .FirstOrDefault() ?? new Account();
+        }
+
+        public DateTime GetAccountCreationDateById(int? id)
+        {
+            return _context.Accounts?
+                .Where(ac => ac.Id == id)
+                .Select(ac => ac.AccountCreationDate)
+                .FirstOrDefault() ?? new DateTime();
         }
 
         public ICollection<Account> GetAccounts()

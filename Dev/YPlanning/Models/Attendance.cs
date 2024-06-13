@@ -23,9 +23,10 @@ namespace YPlanning.Models
 
         [Column("reason")]
         public string? Reason { get; set; }
-
+        
         [ForeignKey("ClassId")]
         public Class? Class { get; set; }
+        
         [ForeignKey("UserId")]
         public User? User { get; set; }
     }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using YPlanning.Models;
 using YPlanning.Interfaces.Services;
 using YPlanning.Dto;
+using YPlanning.Authorize;
 
 namespace YPlanning.Controllers
 {
@@ -20,6 +21,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<AttendanceDto>))]
         public IActionResult GetAttendances() 
         {
@@ -30,6 +32,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("{attendanceId:int}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(AttendanceDto))]
         public IActionResult GetAttendanceById(int? attendanceId)
         {
@@ -46,6 +49,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("{classId:int}/{userId:int}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(AttendanceDto))]
         public IActionResult GetAttendanceByClassAndUserId(int? classId, int? userId)
         {
@@ -62,6 +66,7 @@ namespace YPlanning.Controllers
         }
         
         [HttpGet("{userId:int}/classes")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ClassDto>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -77,6 +82,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("{classId:int}/users")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<UserDto>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -92,6 +98,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPost]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
@@ -121,6 +128,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPut("{attendanceId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -152,6 +160,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("{attendanceId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -173,6 +182,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("{classId:int}/{userId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

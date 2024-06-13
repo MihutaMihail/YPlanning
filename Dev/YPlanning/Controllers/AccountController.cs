@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using YPlanning.Models;
 using YPlanning.Interfaces.Services;
 using YPlanning.Dto;
+using Microsoft.AspNetCore.Identity;
+using YPlanning.Authorize;
 
 namespace YPlanning.Controllers
 {
@@ -11,15 +13,48 @@ namespace YPlanning.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
+        private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
+        private readonly IPasswordHasher<Account> _passwordHasher;
 
-        public AccountController(IAccountService accountService, IMapper mapper)
+        public AccountController(IAccountService accountService, ITokenService tokenService, 
+            IMapper mapper, IPasswordHasher<Account> passwordHasher)
         {
             _accountService = accountService;
+            _tokenService = tokenService;
             _mapper = mapper;
+            _passwordHasher = passwordHasher;
         }
 
+        [HttpPost("login")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        public IActionResult Login([FromBody] LoginDto loginDto)
+        {
+            var login = loginDto.Login;
+            var password = loginDto.Password;
+
+            if (!_accountService.Authenticate(login, password))
+                return Unauthorized("Invalid credentials");
+
+            var user = _accountService.GetUserByAccount(login, password);
+
+            var existingTokenValue = _tokenService.GetTokenValueByUserId(user.Id);
+            if (existingTokenValue != "null")
+                return Ok(new { Token = existingTokenValue });
+
+            if (!_tokenService.CreateTokenForUser(user))
+            {
+                ModelState.AddModelError("", "Something went wrong while creating token");
+                return StatusCode(500, ModelState);
+            }
+            
+            var newTokenValue = _tokenService.GetTokenValueByUserId(user.Id);
+            return Ok(new { Token = newTokenValue });
+        }
+        
         [HttpGet]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<AccountDto>))]
         public IActionResult GetAccounts()
         {
@@ -28,8 +63,9 @@ namespace YPlanning.Controllers
             
             return Ok(accountsDto);
         }
-
+        
         [HttpGet("{accountId:int}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(AccountDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -48,6 +84,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("user/{userId:int}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(AccountDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -66,6 +103,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPost]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
@@ -85,6 +123,9 @@ namespace YPlanning.Controllers
             }
             
             var accountMap = _mapper.Map<Account>(accountCreate);
+            accountMap.Password = _passwordHasher.HashPassword(accountMap, accountCreate.Password);
+            accountMap.AccountCreationDate = DateTime.UtcNow;
+
             if (!_accountService.CreateAccount(accountMap))
             {
                 ModelState.AddModelError("", "Something went wrong while saving");
@@ -95,6 +136,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPut("{accountId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -115,6 +157,8 @@ namespace YPlanning.Controllers
             
             var accountMap = _mapper.Map<Account>(updatedAccount);
             accountMap.Id = accountId ?? -1;
+            accountMap.Password = _passwordHasher.HashPassword(accountMap, updatedAccount.Password);
+            accountMap.AccountCreationDate = _accountService.GetAccountCreationDateById(accountId);
 
             if (!_accountService.UpdateAccount(accountMap))
             {
@@ -126,6 +170,7 @@ namespace YPlanning.Controllers
         }
         
         [HttpDelete("{accountId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -147,6 +192,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("user/{userId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

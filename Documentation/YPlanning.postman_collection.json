@@ -10,10 +10,143 @@
 			"name": "Account",
 			"item": [
 				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"test\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:443/api/account/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "GetAccounts",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "yEeslqZjUyUE4VGq9lQUY3fZLmRIK1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/account",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"account"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccountById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "yEeslqZjUyUE4VGq9lQUY3fZLmRIK1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/account/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"account",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccountByUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/account/user/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"account",
+								"user",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateAccount",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"test\",\r\n  \"password\": \"test\",\r\n  \"userId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "https://localhost:443/api/account",
 							"protocol": "https",
@@ -30,12 +163,27 @@
 					"response": []
 				},
 				{
-					"name": "GetAccountById",
+					"name": "UpdateAccount",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "PUT",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"login\": \"update\",\r\n  \"password\": \"updatepassword\",\r\n  \"userId\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "https://localhost:443/api/account/1",
+							"raw": "https://localhost:443/api/account/2",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -44,7 +192,62 @@
 							"path": [
 								"api",
 								"account",
-								"1"
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAccountById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/account/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"account",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAccountByUserId",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/account/user/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"account",
+								"user",
+								"2"
 							]
 						}
 					},
@@ -59,7 +262,13 @@
 					"name": "GetAttendances",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://localhost:443/api/attendance",
 							"protocol": "https",
@@ -70,6 +279,103 @@
 							"path": [
 								"api",
 								"attendance"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAttendanceById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/attendance/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"attendance",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAttendanceByClassAndUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/attendance/2/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"attendance",
+								"2",
+								"3"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClassesByUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/attendance/1/classes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"attendance",
+								"1",
+								"classes"
 							]
 						}
 					},
@@ -79,7 +385,13 @@
 					"name": "GetUsersByClassId",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://localhost:443/api/attendance/1/users",
 							"protocol": "https",
@@ -98,12 +410,62 @@
 					"response": []
 				},
 				{
-					"name": "GetClassesByUserId",
+					"name": "CreateAttendance",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"classId\": 1,\r\n  \"userId\": 2,\r\n  \"status\": \"Present\",\r\n  \"reason\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "https://localhost:443/api/attendance/1/classes",
+							"raw": "https://localhost:443/api/attendance",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"attendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAttendance",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"classId\": 2,\r\n  \"userId\": 2,\r\n  \"status\": \"Present\",\r\n  \"reason\": \"He's here\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:443/api/attendance/4",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -112,8 +474,62 @@
 							"path": [
 								"api",
 								"attendance",
-								"1",
-								"classes"
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAttendanceById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/attendance/0",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"attendance",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAttendanceByClassAndUserId",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/attendance/2/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"attendance",
+								"2",
+								"3"
 							]
 						}
 					},
@@ -128,7 +544,13 @@
 					"name": "GetClasses",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://localhost:443/api/class",
 							"protocol": "https",
@@ -148,7 +570,167 @@
 					"name": "GetClassById",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/class/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"class",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClassesBySubject",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/class/subject/History",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"class",
+								"subject",
+								"History"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClassesByDate",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/class/date/2024-06-03",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"class",
+								"date",
+								"2024-06-03"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateClass",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"subject\": \"French\",\r\n  \"classDate\": \"2024-06-05\",\r\n  \"startTime\": \"09:00:00\",\r\n  \"endTime\": \"13:00:00\",\r\n  \"room\": \"508\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:443/api/class",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"class"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateClass",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"subject\": \"Geography\",\r\n  \"classDate\": \"2024-06-05\",\r\n  \"startTime\": \"09:00:00\",\r\n  \"endTime\": \"13:00:00\",\r\n  \"room\": \"508\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:443/api/class/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"class",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteClassById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://localhost:443/api/class/1",
 							"protocol": "https",
@@ -164,6 +746,62 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "DeleteClassBySubject",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/class/subject/History",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"class",
+								"subject",
+								"History"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteClassByDate",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/class/date/2024-06-03",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"class",
+								"date",
+								"2024-06-03"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -174,7 +812,166 @@
 					"name": "GetTests",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/test",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"test"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTestById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/test/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"test",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTestByClassAndUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/test/2/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"test",
+								"2",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetClassesByUserId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/test/1/classes",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"test",
+								"1",
+								"classes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsersByClassId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/test/1/users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"test",
+								"1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateTest",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"classId\": 1,\r\n  \"userId\": 3,\r\n  \"score\": \"50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "https://localhost:443/api/test",
 							"protocol": "https",
@@ -191,12 +988,27 @@
 					"response": []
 				},
 				{
-					"name": "GetTestById",
+					"name": "UpdateTest",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "PUT",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"classId\": 1,\r\n  \"userId\": 4,\r\n  \"score\": \"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "https://localhost:443/api/test/1",
+							"raw": "https://localhost:443/api/test/5",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -205,7 +1017,62 @@
 							"path": [
 								"api",
 								"test",
-								"1"
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTestById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/test/0",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"test",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTestByClassAndUserId",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/test/2/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"test",
+								"2",
+								"4"
 							]
 						}
 					},
@@ -220,7 +1087,13 @@
 					"name": "GetUsers",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "https://localhost:443/api/user",
 							"protocol": "https",
@@ -240,9 +1113,15 @@
 					"name": "GetUserById",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "https://localhost:443/api/user/1",
+							"raw": "https://localhost:443/api/user/5",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -251,7 +1130,161 @@
 							"path": [
 								"api",
 								"user",
-								"1"
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserByName",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/user/saitama/twohands",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"user",
+								"saitama",
+								"twohands"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lastName\": \"gfg\",\r\n  \"firstName\": \"firshhhghtname\",\r\n  \"birthDate\": \"1990-01-01\",\r\n  \"email\": \"sdfsdf@gmail.com\",\r\n  \"phoneNumber\": \"123457921\",\r\n  \"role\": \"teacher\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:443/api/user",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lastName\": \"new\",\r\n  \"firstName\": \"test update\",\r\n  \"birthDate\": \"2200-05-05\",\r\n  \"email\": \"bob.thebuilder@example.com\",\r\n  \"phoneNumber\": \"123123\",\r\n  \"role\": \"student\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:443/api/user/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUserById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/user/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"user",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUserByName",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "yplanning-key",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:443/api/user/saitama/twohands",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "443",
+							"path": [
+								"api",
+								"user",
+								"saitama",
+								"twohands"
 							]
 						}
 					},

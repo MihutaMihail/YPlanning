@@ -17,6 +17,8 @@
 - [**08/06/2024**](#08062024)
 - [**09/06/2024**](#09062024)
 - [**10-11/06/2024**](#10-11062024)
+- [**12/06/2024**](#12062024)
+- [**13/06/2024**](#13062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -122,3 +124,17 @@ J'ai aussi réléchit comment je pourrais faire pour intégrer un token en tant 
 ## 10-11/06/2024
 Fini tous les changement nécessaires pour intégrer les services.
 Plusieurs endpoints on été ajouté.
+
+## 12/06/2024
+Mis à jour du script powershell pour qu'il génére un token simple et il l'encrypte avec AES.
+Il envoie aussi la clé et le IV (initialisation vector) au conteneur de l'API pour qu'il puisse utiliser cette même clé et IV dans le cryptage des tokens dans l'API.
+Vu qu'on aura besoin d'un token pour accèder aux endpoints, il faut déjà insérer dès le début un token valide (qui est donc crypter de la même dans le script powershell ainsi que dans l'API) 
+
+Le endpoint /login a été construit pour qu'on puisse se connecter. Se connecter va nous retourner un token, et c'est ce token là qu'on va utiliser pour accèder aux endpoints. Il peut aussi être utiliser pour vérifier si on a les privilèges nécessaires pour accèder à un endpoint comme CreateAccount ou CreateUser
+
+## 13/06/2024
+Vérification du rôle dans les endpoints. On peut accèder à un endpoint que si on a un token. Il est donné une fois qu'on se connecte.
+Si notre token est valide, on peut accèder au endpoint SAUF SI on n'a pas les droits. Pour certains endpoints comme CreateAccount ou DeleteAccount qu'une personne
+avec un rôle "admin" peut accèder.
+
+Mis à jour la collection postman.
