@@ -130,7 +130,7 @@ Les fonctionnalités à avoir pour que le projet soit considéré comme viable s
 - Configuration de l’infrastructure (serveur dns, dhcp, web et base de données)
 - Sécurisation de l’infrastructure (gestion des accès (ACL), configuration pare-feu)
 - Image proxy inverse pour Docker
-- Aide au développement de l'interface
+- Aide au développement de l'interface graphique
 - Partie infra de la documentation technique
 - UML détaillant la base de données
 - Création des schémas pour les usages (use case)
