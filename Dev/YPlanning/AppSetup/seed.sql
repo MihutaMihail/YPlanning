@@ -1,13 +1,13 @@
 /*
-    IMPORTANT : WHEN COPYING THE ENCRYPTED TOKEN, MAKE SURE TO NOT CLOSE THE POWERSHELL WINDOWS
-    CLOSING IT, WILL RESET THE KEY AND IV FOR THE AES ENCRYPTION MEANING THAT THE ENCRYPTED TOKEN
-    THAT YOU'RE COPYING HERE WILL NOT WORK
+    IMPORTANT : WHEN COPYING THE ENCRYPTED TOKEN, MAKE SURE TO NOT CLOSE THE POWERSHELL WINDOW
+    CLOSING IT WILL RESET THE KEY AND IV FOR THE AES ENCRYPTION MEANING THAT THE ENCRYPTED TOKEN
+    THAT YOU'RE COPYING HERE WILL NOT WORK.
 
     **HOW TO USE** : 
-        1. Using setup.ps1 script, choose option 5 : Generate Token
+        1. Go to setup.ps1 script (found at /), right-click, run with PowerShell and choose option 5 : Generate Token
 
         2. Replace YOUR_TOKEN_HERE placeholder with the ENCRYPTED token
-        (don't forget to copy the other token, you will need it (i.e Postman))
+        (don't forget to copy the other token, you will need it for Postman)
 
         3. /\ YOU'RE DONE /\. You can go back and continue following the tutorial inside
         the README.md on GitHub.
@@ -28,7 +28,8 @@ INSERT INTO TOKENS (value, role, userId) VALUES
 --------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------
 -- **TO NOTE** : THIS IS SOLELY FOR TESTING PURPOSES, INSERTING DATA LIKE THIS WILL LEAVE
--- PASSWORDS UNHASHED. IF YOU WANT TO USE IT, REMOVE THE /* and */ (comments)
+-- PASSWORDS UNHASHED. 
+-- IF YOU WANT TO USE IT THIS DATA, REMOVE THE /* and */
 /*
 INSERT INTO USERS (lastName, firstName, birthDate, email, phoneNumber, role) VALUES
 ('Bob', 'TheBuilder', '1990-01-01', 'bob.thebuilder@example.com', '123-456-7890', 'student'),
