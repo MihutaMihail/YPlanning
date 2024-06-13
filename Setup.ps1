@@ -1,4 +1,6 @@
 $APP_SETUP_PATH = "./Dev/YPlanning/AppSetup"
+$KEY = [System.Text.Encoding]::UTF8.GetBytes("your-32-char-secret-key") # Use a 32-char key for AES-256
+$IV = [System.Text.Encoding]::UTF8.GetBytes("your-16-char-iv") # Use a 16-char IV
 
 # /*-----------------------------------
 ### CERTIFICATE
@@ -200,42 +202,61 @@ function Run-API {
 
     # Run container
     Write-Host "Running API container..."
-    Invoke-Expression "docker run --name $containerName -p $portMapping -e 'CERT_PASSWORD=$certPasswordPlainText' -e 'POSTGRES_PASSWORD=$pgPasswordPlainText' -e 'POSTGRESS_IP_ADDRESS=$pgIpAddress' -d $containerName"
+    Invoke-Expression "docker run --name $containerName -p $portMapping -e 'CERT_PASSWORD=$certPasswordPlainText' -e 'POSTGRES_PASSWORD=$pgPasswordPlainText' -e 'POSTGRESS_IP_ADDRESS=$pgIpAddress' -e 'AES_KEY=$KEY_Base64' -e 'AES_IV=$IV_Base64' -d $containerName"
 }
 
 # /*-----------------------------------
-### GENERATE TOKEN
+### TOKEN
 # \*-----------------------------------
 
-function Handle-GenerateToken {
-    $token = Generate-SimpleToken
-    $hashedToken = Hash-Token -token $token
+function Handle-Token {
+    $token = Generate-RandomString -length $tokenLength
+    $encryptedToken = Encrypt-Token -token $token -KEY $KEY_string -IV $IV_string
 
     Write-Host "--- Token (for API) : $token"
-    Write-Host "--- Hashed token (for database) : $hashedToken"
+    Write-Host "--- Encrypted token (for database) : $encryptedToken"
 }
 
-function Generate-SimpleToken {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-    $token = -join ((1..30) | ForEach-Object { $chars[(Get-Random -Maximum $chars.Length)] })
-    return $token
-}
-
-function Hash-Token {
+function Encrypt-Token {
     param (
-        [string]$token
+        [string]$token,
+        [string]$KEY,
+        [string]$IV
     )
 
-    $sha256 = [System.Security.Cryptography.SHA256]::Create()
-    $bytes = [System.Text.Encoding]::UTF8.GetBytes($token)
-    $hashBytes = $sha256.ComputeHash($bytes)
-    $hashString = [BitConverter]::ToString($hashBytes) -replace '-', ''
-    return $hashString
+    $aes = [System.Security.Cryptography.Aes]::Create()
+    $aes.Key = [System.Text.Encoding]::UTF8.GetBytes($KEY)
+    $aes.IV = [System.Text.Encoding]::UTF8.GetBytes($IV)
+
+    $encryptor = $aes.CreateEncryptor($aes.Key, $aes.IV)
+    $tokenBytes = [System.Text.Encoding]::UTF8.GetBytes($token)
+
+    $ms = New-Object System.IO.MemoryStream
+    $cs = New-Object System.Security.Cryptography.CryptoStream($ms, $encryptor, [System.Security.Cryptography.CryptoStreamMode]::Write)
+    $cs.Write($tokenBytes, 0, $tokenBytes.Length)
+    $cs.FlushFinalBlock()
+
+    $encryptedTokenBytes = $ms.ToArray()
+    $cs.Close()
+    $ms.Close()
+
+    $encryptedToken = [Convert]::ToBase64String($encryptedTokenBytes)
+    return $encryptedToken
 }
 
 # /*-----------------------------------
 ### HELPER
 # \*-----------------------------------
+
+function Generate-RandomString {
+    param (
+        [int]$length
+    )
+
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    $token = -join ((1..$length) | ForEach-Object { $chars[(Get-Random -Maximum $chars.Length)] })
+    return $token
+}
 
 function Read-Password {
     param (
@@ -272,10 +293,21 @@ function Remove-Containers {
 ### --- ENTRY POINT ---
 # \*-----------------------------------
 
+$tokenLength = 30
+$keyLength = 32
+$ivLength = 16
+
+$KEY_string = Generate-RandomString -length $keyLength
+$IV_string = Generate-RandomString -length $ivLength
+
+$KEY_Base64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($KEY_string))
+$IV_Base64 = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($IV_string))
+
 function Show-Menu {
     Clear-Host
     Write-Host "=== Setup Menu ==="
-    Write-Host "1. FULL SETUP (RECOMMENDED FOR FIRST USE)"
+    Write-Host "1. FULL SETUP (RECOMMENDED)"
+    Write-Host "Q. Quit"
     Write-Host ""
     Write-Host "WARNING : CHOOSING ANYTHING ON THIS LIST COULD RESULT IN DATA LOSS"
     Write-Host "Please note that it could also simply fail to work if the FULL SETUP option has not been completed"
@@ -283,7 +315,6 @@ function Show-Menu {
     Write-Host "3. PostgreSQL"
     Write-Host "4. API"
     Write-Host "5. Generate Token"
-    Write-Host "Q. Quit"
     Write-Host "============="
 }
 
@@ -310,7 +341,7 @@ do {
             Pause
         }
         '5' {
-            Handle-GenerateToken
+            Handle-Token
             Pause
         }
         'Q' {

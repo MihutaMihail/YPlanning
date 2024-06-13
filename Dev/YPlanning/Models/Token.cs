@@ -3,26 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YPlanning.Models
 {
-    public class Test
+    public class Token
     {
         [Column("id")]
         [Key]
         public int Id { get; set; }
 
-        [Column("classid")]
-        [Required(ErrorMessage = "Class id is required")]
-        public int? ClassId { get; set; }
+        [Column("value")]
+        [Required(ErrorMessage = "Value is required")]
+        public string? Value { get; set; }
+        
+        [Column("role")]
+        [Required(ErrorMessage = "Role is required")]
+        public string? Role { get; set; }
 
         [Column("userid")]
         [Required(ErrorMessage = "User id is required")]
         public int? UserId { get; set; }
-
-        [Column("score")]
-        [Required(ErrorMessage = "Score is required")]
-        public string? Score { get; set; }
-
-        [ForeignKey("ClassId")]
-        public Class? Class { get; set; }
 
         [ForeignKey("UserId")]
         public User? User { get; set; }

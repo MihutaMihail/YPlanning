@@ -34,6 +34,7 @@ namespace YPlanning.Models
         public string? Role { get; set; }
 
         public Account? Account { get; set; }
+        public Token? Token { get; set; }
         public ICollection<Test>? Tests { get; set; }
         public ICollection<Attendance>? Attendances { get; set; }
     }

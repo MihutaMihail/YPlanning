@@ -1,26 +1,29 @@
 /*
+    IMPORTANT : WHEN COPYING THE ENCRYPTED TOKEN, MAKE SURE TO NOT CLOSE THE POWERSHELL WINDOWS
+    CLOSING IT, WILL RESET THE KEY AND IV FOR THE AES ENCRYPTION MEANING THAT THE ENCRYPTED TOKEN
+    THAT YOU'RE COPYING HERE WILL NOT WORK
+
     **HOW TO USE** : 
         1. Using setup.ps1 script, choose option 5 : Generate Token
 
-        2. Replace YOUR_TOKEN_HERE placeholder with the HASHED token
+        2. Replace YOUR_TOKEN_HERE placeholder with the ENCRYPTED token
         (don't forget to copy the other token, you will need it (i.e Postman))
 
-        3. **YOU'RE DONE**. Continue to follow the README tutorial, but remember, after installing
-        everything, REMOVE your hashed token from the template.
+        3. /\ YOU'RE DONE /\. You can go back and continue following the tutorial inside
+        the README.md on GitHub.
+        TO NOTE : AFTER installing everything, the hashed token can be deleted.
 */
 
 -- TEMPLATE
 /*____________________________________________________________________________________________________*/
 
-INSERT INTO USERS (lastName, firstName, birthDate, email, phoneNumber, role) VALUES 
+INSERT INTO USERS (lastName, firstName, birthDate, email, phoneNumber, role) VALUES
 ('LAST_NAME', 'FIRST_NAME', '2000-01-01', 'LAST_NAME.FIRST_NAME@EXAMPLE.COM', '123-456-7890', 'admin');
 
-INSERT INTO TOKENS (token, role, userId) VALUES
-('32584133B685D36D5A907F4DCF2AD5C8A22CED700D89D71313C89BD7F2D9C587', 'admin', 1);
+INSERT INTO TOKENS (value, role, userId) VALUES
+('n1STuDQ3I+XxCnZCc6VN+jJGC0FEVxkXrtRGqXY2xF8=', 'admin', 1);
 
 /*____________________________________________________________________________________________________*/
-
--- T0Pq07eCLWlm7Gg8yACbuTWwyvLje0
 
 --------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------

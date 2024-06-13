@@ -11,16 +11,19 @@ namespace YPlanning.Services
         private readonly ITestService _testService;
         private readonly IAttendanceService _attendanceService;
         private readonly IAccountService _accountService;
+        private readonly ITokenService _tokenService;
 
         public UserService(IUserRepository userRepository,
             ITestService testService,
             IAttendanceService attendanceService,
-            IAccountService accountService)
+            IAccountService accountService,
+            ITokenService tokenService)
         {
             _userRepository = userRepository;
             _testService = testService;
             _attendanceService = attendanceService;
             _accountService = accountService;
+            _tokenService = tokenService;
         }
 
         public bool CreateUser(User createUser)
@@ -98,6 +101,9 @@ namespace YPlanning.Services
             if (!_accountService.DeleteAccountByUserId(userId))
                 return false;
 
+            if (!_tokenService.DeleteTokenByUserId(userId))
+                return false;
+            
             return true;
         }
     }

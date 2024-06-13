@@ -11,6 +11,7 @@ namespace YPlanning.Data
         }
 
         public DbSet<User>? Users { get; set; }
+        public DbSet<Token>? Tokens { get; set; }
         public DbSet<Account>? Accounts { get; set; }
         public DbSet<Class>? Classes { get; set; }
         public DbSet<Attendance>? Attendances { get; set; }
@@ -20,6 +21,7 @@ namespace YPlanning.Data
         {
             // Specify the table names for all entities
             modelBuilder.Entity<User>().ToTable("users");
+            modelBuilder.Entity<Token>().ToTable("tokens");
             modelBuilder.Entity<Account>().ToTable("accounts");
             modelBuilder.Entity<Class>().ToTable("classes");
             modelBuilder.Entity<Attendance>().ToTable("attendances");
@@ -30,10 +32,12 @@ namespace YPlanning.Data
                 .HasOne(u => u.Account)
                 .WithOne(ac => ac.User)
                 .HasForeignKey<Account>(ac => ac.UserId);
-            
+
             // One-to-to relationship between USER and TOKEN
-            /*modelBuilder.Entity<User>()
-                .HasOne(u => u.)*/
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Token)
+                .WithOne(t => t.User)
+                .HasForeignKey<Token>(t => t.UserId);
 
             // One-to-many relationship between USERS and TESTS
             modelBuilder.Entity<User>()
