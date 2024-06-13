@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using YPlanning.Models;
 using YPlanning.Interfaces.Services;
 using YPlanning.Dto;
+using YPlanning.Authorize;
 
 namespace YPlanning.Controllers
 {
@@ -20,6 +21,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ClassDto>))]
         public IActionResult GetClasses()
         {
@@ -30,6 +32,7 @@ namespace YPlanning.Controllers
         }
         
         [HttpGet("{classId:int}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(ClassDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -48,6 +51,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("subject/{subject}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ClassDto>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -63,6 +67,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("date/{date}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ClassDto>))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -81,6 +86,7 @@ namespace YPlanning.Controllers
 
 
         [HttpPost]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
@@ -112,6 +118,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPut("{classId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -145,6 +152,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("{classId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -166,6 +174,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("subject/{subject}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -184,6 +193,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("date/{date}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

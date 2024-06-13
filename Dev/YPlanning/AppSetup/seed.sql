@@ -21,7 +21,7 @@ INSERT INTO USERS (lastName, firstName, birthDate, email, phoneNumber, role) VAL
 ('LAST_NAME', 'FIRST_NAME', '2000-01-01', 'LAST_NAME.FIRST_NAME@EXAMPLE.COM', '123-456-7890', 'admin');
 
 INSERT INTO TOKENS (value, role, userId) VALUES
-('n1STuDQ3I+XxCnZCc6VN+jJGC0FEVxkXrtRGqXY2xF8=', 'admin', 1);
+('YOUR_TOKEN_HERE', 'admin', 1);
 
 /*____________________________________________________________________________________________________*/
 
@@ -31,10 +31,10 @@ INSERT INTO TOKENS (value, role, userId) VALUES
 -- PASSWORDS UNHASHED. IF YOU WANT TO USE IT, REMOVE THE /* and */ (comments)
 /*
 INSERT INTO USERS (lastName, firstName, birthDate, email, phoneNumber, role) VALUES
-('Bob', 'TheBuilder', '1990-01-01', 'bob.thebuilder@example.com', '123-456-7890', 'Student'),
-('Saitama', 'TwoHands', '1985-05-15', 'saitama.twohands@example.com', '098-765-4321', 'Teacher'),
-('Kendrick', 'Drake', '1985-05-15', 'kendrick.drake@example.com', '0604060408', 'Student'),
-('UseFor', 'Testing', '1995-04-10', 'usefor.testing@example.com', '4545454', 'Student');
+('Bob', 'TheBuilder', '1990-01-01', 'bob.thebuilder@example.com', '123-456-7890', 'student'),
+('Saitama', 'TwoHands', '1985-05-15', 'saitama.twohands@example.com', '098-765-4321', 'teacher'),
+('Kendrick', 'Drake', '1985-05-15', 'kendrick.drake@example.com', '0604060408', 'student'),
+('UseFor', 'Testing', '1995-04-10', 'usefor.testing@example.com', '4545454', 'student');
 
 INSERT INTO ACCOUNTS (login, password, accountCreationDate, lastLoginDate, userId) VALUES
 ('bob.thebuilder', 'password123', '2024-01-01', '2024-01-10', 1),

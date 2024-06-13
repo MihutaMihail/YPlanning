@@ -40,7 +40,20 @@ namespace YPlanning.Services
 
         public bool DoesTokenExist(string? value)
         {
-            return _tokenRepository.DoesTokenExist(value);
+            if (value == null)
+                return false;
+            
+            var encryptedValue = TokenHelper.EncryptToken(value);
+            return _tokenRepository.DoesTokenExist(encryptedValue);
+        }
+
+        public Token GetTokenByValue(string? value)
+        {
+            if (value == null)
+                return new Token();
+            
+            var encryptedValue = TokenHelper.EncryptToken(value);
+            return _tokenRepository.GetTokenByValue(encryptedValue);
         }
 
         public string GetTokenValueByUserId(int? userId)

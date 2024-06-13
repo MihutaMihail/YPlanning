@@ -38,6 +38,13 @@ namespace YPlanning.Repository
                 .FirstOrDefault() ?? new Token();
         }
 
+        public Token GetTokenByValue(string? value)
+        {
+            return _context.Tokens?
+                .Where(t => t.Value == value)
+                .FirstOrDefault() ?? new Token();
+        }
+
         public bool Save()
         {
             var saved = _context.SaveChanges();

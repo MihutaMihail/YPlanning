@@ -4,6 +4,7 @@ using YPlanning.Models;
 using YPlanning.Interfaces.Services;
 using YPlanning.Dto;
 using Microsoft.AspNetCore.Identity;
+using YPlanning.Authorize;
 
 namespace YPlanning.Controllers
 {
@@ -38,12 +39,10 @@ namespace YPlanning.Controllers
 
             var user = _accountService.GetUserByAccount(login, password);
 
-            // Check if token exists
             var existingTokenValue = _tokenService.GetTokenValueByUserId(user.Id);
             if (existingTokenValue != "null")
                 return Ok(new { Token = existingTokenValue });
 
-            // Create new token
             if (!_tokenService.CreateTokenForUser(user))
             {
                 ModelState.AddModelError("", "Something went wrong while creating token");
@@ -55,6 +54,7 @@ namespace YPlanning.Controllers
         }
         
         [HttpGet]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<AccountDto>))]
         public IActionResult GetAccounts()
         {
@@ -63,8 +63,9 @@ namespace YPlanning.Controllers
             
             return Ok(accountsDto);
         }
-
+        
         [HttpGet("{accountId:int}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(AccountDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -83,6 +84,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpGet("user/{userId:int}")]
+        [AuthorizeRole("admin", "teacher", "student")]
         [ProducesResponseType(200, Type = typeof(AccountDto))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -101,6 +103,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPost]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
         [ProducesResponseType(409)]
@@ -133,6 +136,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpPut("{accountId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -166,6 +170,7 @@ namespace YPlanning.Controllers
         }
         
         [HttpDelete("{accountId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -187,6 +192,7 @@ namespace YPlanning.Controllers
         }
 
         [HttpDelete("user/{userId:int}")]
+        [AuthorizeRole("admin")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
