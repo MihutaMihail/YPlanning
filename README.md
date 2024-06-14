@@ -1,6 +1,6 @@
 ## Description
 YPlanning is a web application that aims to manage courses (inspired by YNOV HyperPlanning). 
-It allows students to view their courses, check their scores and professors to input those scores as well as taking attendance.
+It allows students to view their courses, check their scores and teachers to input those scores as well as taking attendance.
 
 # Table of Contents
 - [**Features**](#features)
@@ -47,7 +47,7 @@ Follow the instructions over there and come back here when indicated. <br>
 2. Inside the same PowerShell window, choose option 1 → **FULL SETUP (RECOMMENDED)**
 3. It will ask you to create a certificate if you don't already have one. If you have one, you can use your existing certificate.
 4. Everything else that will require an input are the passwords for the certificate and the database. You will need to type the same password twice, once when creating the certificate and database, and once when building the API so that it can have access to the aforementioned elements using the password that you have chosen in the previous step.
-5. **YOU'RE DONE**. The API and PostgreSQL containers should be running, you can view the database using **pgAdmin 4** (use same password as chosen inside the script) or even access the SWAGGER documentation on **https://localhost:443/swagger/index.html** 
+5. **YOU'RE DONE**. The API and PostgreSQL containers should be running, you can view the database using **pgAdmin 4** (use same password as chosen inside the script) or even access the SWAGGER documentation on https://localhost:443/swagger/index.html
 <br>
 <br>
 
@@ -87,3 +87,5 @@ The purpose of that was to create a *TEMPORARY* token with admin level access so
 
 ## API Documentation
 At the moment, the API documentation is not available. However, an automatically generated SWAGGER documentation containing all endpoints can be accessed [here](https://mihutamihail.github.io/YPlanning).
+
+TO NOTE: this SWAGGER documentation will not look the same as the SWAGGER documentation that you will use on https://localhost:443/swagger/index.html. That is because this is a HTML representation of the JSON code that you can find [here](../swagger.json) using [Swagger Editor](https://editor.swagger.io/).
