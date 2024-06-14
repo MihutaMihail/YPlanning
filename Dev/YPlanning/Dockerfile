@@ -19,15 +19,9 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-# Copy certificate file into container
-COPY ["localhost.pfx", "/app/localhost.pfx"]
-
-# Set environment variables for the certificate
+# Setup certificate for HTTPS
+COPY ["./AppSetup/localhost.pfx", "/app/localhost.pfx"]
 ENV CERT_PATH="/app/localhost.pfx"
-
-# Add Docker secrets into container
-RUN --mount=type=secret,id=CERT_PASSWORD \
-    cat /run/secrets/CERT_PASSWORD > /app/cert_password.txt
 
 # Copy published application from publish stage to current dir
 COPY --from=publish /app/publish .
