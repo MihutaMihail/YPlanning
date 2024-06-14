@@ -88,4 +88,4 @@ The purpose of that was to create a *TEMPORARY* token with admin level access so
 ## API Documentation
 At the moment, the API documentation is not available. However, an automatically generated SWAGGER documentation containing all endpoints can be accessed [here](https://mihutamihail.github.io/YPlanning).
 
-TO NOTE: this SWAGGER documentation will not look the same as the SWAGGER documentation that you will use on https://localhost:443/swagger/index.html. That is because this is a HTML representation of the JSON code that you can find [here](../swagger.json) using [Swagger Editor](https://editor.swagger.io/).
+TO NOTE: this SWAGGER documentation will not look the same as the SWAGGER documentation that you will use on https://localhost:443/swagger/index.html. That is because this is a HTML representation of the JSON code that you can find [here](./Documentation/swagger.json) using [Swagger Editor](https://editor.swagger.io/).
