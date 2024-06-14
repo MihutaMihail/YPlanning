@@ -27,3 +27,7 @@ Configuration du serveur web, et enregistrement des étapes
 
 * jour 12
   Finalisation de la doc du serveur de base de données et du serveur web 
+
+*jour 13
+ Finalisation de la doc du serveur web
+
