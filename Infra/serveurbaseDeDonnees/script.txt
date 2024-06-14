@@ -1,0 +1,70 @@
+CREATE TABLE TESTS(
+   id INTEGER,
+   classId INTEGER,
+   userId INTEGER,
+   score VARCHAR(50) ,
+   PRIMARY KEY(id)
+);
+
+CREATE TABLE ATTENDANCES(
+   classId INTEGER,
+   userId INTEGER,
+   status VARCHAR(50) ,
+   reason VARCHAR(50) ,
+   PRIMARY KEY(classId, userId)
+);
+
+CREATE TABLE USERS(
+   Id INTEGER,
+   lastName VARCHAR(100) ,
+   firstName VARCHAR(100)  NOT NULL,
+   birthDate DATE,
+   email VARCHAR(100) ,
+   phoneNumber VARCHAR(15) ,
+   role VARCHAR(50) ,
+   classId INTEGER NOT NULL,
+   userId INTEGER NOT NULL,
+   id_1 INTEGER NOT NULL,
+   PRIMARY KEY(Id),
+   FOREIGN KEY(classId, userId) REFERENCES ATTENDANCES(classId, userId),
+   FOREIGN KEY(id_1) REFERENCES TESTS(id)
+);
+
+CREATE TABLE CLASSES(
+   Id INTEGER,
+   subject VARCHAR(100) ,
+   classDate DATE,
+   startTime TIME,
+   endTime TIME,
+   id_1 INTEGER NOT NULL,
+   classId INTEGER NOT NULL,
+   userId INTEGER NOT NULL,
+   PRIMARY KEY(Id),
+   FOREIGN KEY(id_1) REFERENCES TESTS(id),
+   FOREIGN KEY(classId, userId) REFERENCES ATTENDANCES(classId, userId)
+);
+
+CREATE TABLE ACCOUNTS(
+   Id_1 INTEGER,
+   Id INTEGER,
+   login VARCHAR(300) ,
+   password VARCHAR(300) ,
+   accountCreationDate DATE,
+   lastLoginDate TIMESTAMP,
+   userId INTEGER,
+   PRIMARY KEY(Id_1, Id),
+   UNIQUE(Id_1),
+   UNIQUE(login),
+   FOREIGN KEY(Id_1) REFERENCES USERS(Id)
+);
+
+CREATE TABLE TOKENS(
+   id INTEGER,
+   token VARCHAR(200)  NOT NULL,
+   role VARCHAR(100)  NOT NULL,
+   userId DATE NOT NULL,
+   Id_1 INTEGER NOT NULL,
+   PRIMARY KEY(id),
+   UNIQUE(Id_1),
+   FOREIGN KEY(Id_1) REFERENCES USERS(Id)
+);
