@@ -5,6 +5,20 @@
 - [**25/05/2024**](#25052024)
 - [**26-27/05/2024**](#26-27052024)
 - [**28/05/2024**](#28052024)
+- [**29/05/2024**](#29052024)
+- [**31/05/2024**](#31052024)
+- [**01/06/2024**](#01062024)
+- [**02/06/2024**](#02062024)
+- [**03/06/2024**](#03062024)
+- [**04/06/2024**](#04062024)
+- [**05/06/2024**](#05062024)
+- [**06/06/2024**](#06062024)
+- [**07/06/2024**](#07062024)
+- [**08/06/2024**](#08062024)
+- [**09/06/2024**](#09062024)
+- [**10-11/06/2024**](#10-11062024)
+- [**12/06/2024**](#12062024)
+- [**13/06/2024**](#13062024)
 
 ## 18/05/2024
 J’ai décidé d’utiliser un ORM (Object Relational Mapper). Le ORM choisi sera Entity Framework (EF) Core. La raison est que ORM, contrairement à un ORM comme Dapper, est du LINQ (Integrated Language Query) ce qui signifie qu’on peut écrire des requêtes SQL en utilisation de la syntaxe C#. Dapper a bien sûr d’autres avantages mais je pense que même si un ORM comme EF n’est pas forcément nécessaire (vu la taille de notre projet), je pourrais essayer de l’utiliser et donc gagner de l’expérience dans le domaine de ORM.
@@ -51,3 +65,76 @@ Faire marcher l'API sur Docker a été accompli plutôt facilement. Le gros prob
 J'ai mis à jour quelques fichiers du dossier documentation.
 On (moi et mon collègue) a fait le MCD pour la base de données.
 De plus, je me suis intérésée comment je pourrais faire fonctionner un serveur Postgres sur Docker et aussi au IDE que je pourrait utiliser observer la base de données.
+
+## 29/05/2024
+Mise à jour du script pour intégrer la base de données PostgresSQL dans Docker. Le script powershell maintenant démarre les conteneurs lors de l'installation, plus besoin de mettre manuellement port 443 pour le l'API. Installation du pg admin 4 pour accèder à la base de données de PostgresSQL. Lors de l'installation (dans le script), je créer la base de données et les tables nécessaires. Je vais probablement ajouter du seeding plus tard.
+
+## 31/05/2024
+Optimisation du code pour le script d'installation et l'ajout d'un menu de cette façon je peux construire que l'image de l'API si j'ai fait des modifications sur l'API mais pour les autres composants comme la base de données ou le certificat. Fait les tables de la base de données dans c# mais le problème qu'apparament c'est pas si simple. Il faut aussi prendre en compte les relations / cardinalités entre les tables et donc les mettres dans l'API.
+
+## 01/06/2024
+Refait les relations et cardinalités pour la base de données. Fait les modèles des tables pour l'API. Utilisation du Entity Framework pour faire le data context qui fait référance à la base de données. Il y a aussi le OnModelCreating() qui est rempli pour que Entity Framework fasse les correctes relations entre les tables.
+
+## 02/06/2024
+J'ai mis à jour le code SQL pour la base de données vu qu'elle a été modifié. J'ai essayer de me connecter à la base de donées postgres depuis l'API j'ai réussi. J'ai eu un problème que je me suis pas rendu compte pour un bon moment mais le problème c'été le host. Je suppose comme le server postgres n'est pas sur notre machine techniquement vu que c'est dans Docker, localhost, donc l'adresse 127.0.0.1 ne va pas fonctionner. Pour cela, il changer le host avec l'adresse du server postgres qui se trouve dans le fichier de configuration.
+
+J'ai fait en sorte que l'adresse IP du serveur PostgreSQL est automatiquement prise le moment où le conteneur de l'API est créer. De cette façon, n'importe l'adresse IP que le serveur PostgreSQL aura, ça devra fonctionner.
+
+J'ai changé les noms des entités au pluriel même si on n'a pas besoin de changer, parfois il y a des mots comme *contraint* ou *user* qui ne peuvent pas être utiliser comme un nom de table vu qu'il est résérver. Les noms d'entités comme *contraint**s*** ou *user**s***, ne vont pas poser des problèmes.
+
+J'ai créer le premier Controller pour les users dans l'API. J'ai utilisé des interfaces pour définir les méthodes utilisées qui vont être faite par les repositories mais aussi pour appeler ces méthodes. C'est comme si l'interface est le front qui va tout définir mais aussi appeller le back (juste le repository) pour utiliser sa fonction.
+Pour finir, tout ça a été utilisé dans un controller pour pouvoir faire un simple get pour avoir tous les users.
+
+Pour finir, j'ai dû indiqué à entity framework d'utiliser des miniscules pour les tables mais aussi pour les colonnes parce que postgres mais tous en miniscule par défaut mais entity framework met la première lettre en majuscule et donc il n'arrive pas a trouver les tables ou colonnes sans définir ces choses là.
+
+## 03/06/2024
+Endpoint créer pour avoir un utilisateur par son id. Ajout du AutoMapper pour plus facilement utiliser des Dto (data transfer object). Vu qu'on a du spécifié dans les modèles les relations entre les tables (ex: le modèle USER a une colonne Account parce qu'il est en relation avec la table Account: relation 1-1), on ne veut pas envoyer ces données qu'on on accède un endpoint comme api/user ou api/user/{userId}. Avec les Dto, on peut spécifier ce qu'on veut envoyer et le AutoMapper va faire ceci automatiquement. Comme ça, quand on accède un endpoint comme api/user, on nous envoie que les colonnes qu'on a choisi. Avec ceci, on peut aussi créer des multiples Dto pour la même entité. On peut avoir un BasicUserDto qui va nous montrer juste les détailles basiques d'un user, mais si on est connecté avec notre compte, on va nous montrer le dto FullUserDto par exemple qui va nous afficher tous les détailles comme notre id, notre rôle, etc.
+
+Tous les endpoints fait pour User ont été fait pour les autres entités restantes.
+
+## 04/06/2024
+Un fichier seed.sql qui insért quelques données dans la base de données a été fait.
+
+J'ai testé tous les endpoints (pour le moment j'ai que les GET all ou GET by id) pour tous les entités dans Postman. (quelques problèmes bien sûr, rien ne fonctionne du premier coup)
+
+Une collection Postman a aussi été exporté et ajouté dans le projet pour avoir tous les tests nécessaires. La collection va être mis à jour une fois que plusieurs endpoints de l'API vont être créer.
+
+## 05/06/2024
+Le POST CreateUser() a été réalisé. Je vais devoir probablement ajouter / supprimer quelques NOT NULL ou autre chose sur la base de données. Pour le moment, je vais faire le CRUD pour avoir une base et comprendre un peu plus comment créer l'API avec ces nouveaux outils et après je vais penser a voir comment je vais faire pour avoir quelque chose plus cohérent et potentiellement mettre en place un système d'authentification avec un token et bla bla bla.
+
+## 06/06/2024
+Tous les POST (avec tous les problèmes) ont été fait pour chaque entité.
+
+J'ai réussi a mettre swagger dans le conteneur Docker dans l'API sur swagger/index.html.
+Il fonctionner sur IIS Express mais comme j'ai changer assez vite sur Docker, il fonctionnait plus, mais c'est bon maintenant.
+
+## 07/06/2024
+PUT endpoint ont été faite pour tous les entités.
+
+J'ai commencé à faire tous les DELETE et j'ai avancé un peu mais j'ai pas encore finir a faire en sorte qu'une fois qu'on supprime un utilisateur, il faut aussi supprimer son compte, ses présences, etc. Par contre, l'action de juste supprimer fonctionne.
+
+## 08/06/2024
+Les méthodes DELETE ont été terminé.
+
+## 09/06/2024
+J'ai décidé de changer comment je gère les DELETE ainsi que d'autre choses en rapport avec ceci. Je doit vraiment séparer les tâches des controleurs et répertoires et peut-être c'est pas la meuilleure idée de mettre 3-4 répertoires dans le controlleur pour faire un delete user vu que je doit effacer plusieurs données qui font référénce à ce user avant de le supprimer sinon on peut pas. Pour faire ceci, je vais créer des SERVICES. Ce sont les services qui vont gèrer ces choses là. Comme ça, le controleur va faire ce qu'il doit faire comme correctement envoyer la réponse, appeler la correcte méthode, mais je ne vais pas mettre ceci dans les répertoires non plus, vu que je veux pas mélanger des users et accounts dans le même répertoire. Le controleur a juste a appeller la méthode DeleteUser() depuis le service, et le service va effacer ce qu'il doit effacer en utilisant les fonctions depuis les répertoire user, account, etc.
+
+J'ai aussi réléchit comment je pourrais faire pour intégrer un token en tant que vérifications. Comme ça, un user simple comme un étudiant pourras pas créer des utilisateurs, les modifier, etc.
+
+## 10-11/06/2024
+Fini tous les changement nécessaires pour intégrer les services.
+Plusieurs endpoints on été ajouté.
+
+## 12/06/2024
+Mis à jour du script powershell pour qu'il génére un token simple et il l'encrypte avec AES.
+Il envoie aussi la clé et le IV (initialisation vector) au conteneur de l'API pour qu'il puisse utiliser cette même clé et IV dans le cryptage des tokens dans l'API.
+Vu qu'on aura besoin d'un token pour accèder aux endpoints, il faut déjà insérer dès le début un token valide (qui est donc crypter de la même dans le script powershell ainsi que dans l'API) 
+
+Le endpoint /login a été construit pour qu'on puisse se connecter. Se connecter va nous retourner un token, et c'est ce token là qu'on va utiliser pour accèder aux endpoints. Il peut aussi être utiliser pour vérifier si on a les privilèges nécessaires pour accèder à un endpoint comme CreateAccount ou CreateUser
+
+## 13/06/2024
+Vérification du rôle dans les endpoints. On peut accèder à un endpoint que si on a un token. Il est donné une fois qu'on se connecte.
+Si notre token est valide, on peut accèder au endpoint SAUF SI on n'a pas les droits. Pour certains endpoints comme CreateAccount ou DeleteAccount qu'une personne
+avec un rôle "admin" peut accèder.
+
+Mis à jour la collection postman.
