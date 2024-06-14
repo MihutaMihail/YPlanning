@@ -41,6 +41,8 @@ It allows students to view their courses, check their scores and teachers to inp
 
 **Before beginning, make sure that you have access to all tools / resources specified inside** [**Prerequisites**](#prerequisites)
 
+Another thing to note, inside the **/Dev/YPlanning/AppSetup/seed.sql** file, there are some data that are not insert by default. If you wish to test all endpoints, you can uncomment those insert as to have some data to play with.
+
 1. Go to **/Dev/YPlanning/AppSetup/seed.sql**. This is how the [file looks like](/Dev/YPlanning/AppSetup/seed.sql). <br>
 Follow the instructions over there and come back here when indicated. <br>
 **TO NOTE: DO THIS INSIDE THE CLONED REPOSITORY**

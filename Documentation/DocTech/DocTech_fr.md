@@ -106,6 +106,8 @@ CREATE TABLE TESTS(
 
 **Avant de commencer, assurez-vous d'avoir accès à tous les outils / ressources spécifiés dans** [**Prérequis**](#prérequis)
 
+Une autre chose à noter, dans le fichier /Dev/YPlanning/AppSetup/seed.sql, il y a certaines données qui ne sont pas insérées par défaut. Si vous souhaitez tester tous les points de terminaison, vous pouvez décommenter ces insertions afin d'avoir des données à manipuler.
+
 1. Allez à **/Dev/YPlanning/AppSetup/seed.sql**. Voici à quoi ressemble le [fichier](/Dev/YPlanning/AppSetup/seed.sql). <br>
 Suivez les instructions là-bas et revenez ici lorsque c'est indiqué. <br>
 **À NOTER: FAITES CELA DANS LE RÉPERTOIRE CLONÉ**
